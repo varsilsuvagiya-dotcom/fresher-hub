@@ -9,7 +9,7 @@ const table = document.querySelector("#leave-list");
 const status_filter = document.querySelector("#status-filtered");
 
 
-const api_url = process.env.API_URL;
+const api_url = "http://localhost:3000/leaves";
 
 
 //header function 
