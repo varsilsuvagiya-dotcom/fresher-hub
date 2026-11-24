@@ -1,22 +1,300 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fresher Hub</title>
-  <link rel="stylesheet" href="shared/theme.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fresher Hub - Everything our fresher batch needs in one place.">
+  <title>Fresher Hub | Home</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <h1>Fresher Hub</h1>
-  <nav>
-    <a href="modules/notice-board/notice.html">Notice Board</a>
-    <a href="modules/team-directory/team.html">Team Directory</a>
-    <a href="modules/leave-request/leave.html">Leave Request</a>
-    <a href="modules/daily-update/daily.html">Daily Update</a>
-    <a href="modules/doubts-board/doubts.html">Doubts Board</a>
-    <a href="modules/events/events.html">Events</a>
-    <a href="modules/resources/resources.html">Resources</a>
-  </nav>
+
+<body class="min-h-screen bg-slate-50 text-slate-800 antialiased">
+
+  <!-- HEADER / NAVBAR -->
+   <div id="header-bar"></div>
+  
+  <!-- MAIN CONTENT -->
+  <main class="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 sm:px-8 sm:py-10">
+
+    <!-- PROJECT INFORMATION -->
+    <!-- <p class="w-fit rounded-full border border-dashed border-indigo-300 bg-indigo-50 px-4 py-2 text-xs font-semibold text-indigo-700">
+      Module 1 · Home Layout
+    </p> -->
+
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-violet-600 px-7 py-12 text-white shadow-lg sm:px-12 sm:py-16">
+
+      <div class="relative z-10 max-w-2xl">
+
+        <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-indigo-200">
+          Your Learning Community
+        </p>
+
+        <h1 class="text-3xl font-bold leading-tight sm:text-5xl">
+          Welcome to <span class="text-indigo-200">Fresher Hub</span>
+        </h1>
+
+        <p class="mt-5 max-w-xl text-base leading-7 text-indigo-100 sm:text-lg">
+          Everything our fresher batch needs in one place.
+          Stay updated, connect with your team, share progress
+          and keep learning together.
+        </p>
+
+        <a href="#hubModules"
+          class="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-700 shadow-sm transition hover:bg-indigo-50">
+          Explore Modules →
+        </a>
+
+      </div>
+
+      <!-- Background Decoration -->
+      <div class="absolute -right-16 -top-20 h-72 w-72 rounded-full border-[36px] border-white/10"></div>
+      <div class="absolute -bottom-28 right-24 h-64 w-64 rounded-full bg-white/10"></div>
+
+    </section>
+
+    <!-- MODULE SECTION -->
+    <section id="hubModules" class="scroll-mt-28">
+
+      <div class="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-wider text-indigo-600">
+            Workspace
+          </p>
+
+          <h2 class="mt-1 text-2xl font-bold text-slate-900 sm:text-3xl">
+            Explore Your Modules
+          </h2>
+
+          <p class="mt-2 text-sm text-slate-500">
+            Everything you need to stay connected and productive.
+          </p>
+        </div>
+
+        <span class="w-fit rounded-full bg-slate-200 px-3 py-1 text-xs font-semibold text-slate-600">
+          7 Modules
+        </span>
+
+      </div>
+
+      <!-- GRID LAYOUT -->
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+        <!-- Notice Board -->
+        <a href="modules/notice-board/notice.html"
+          class="group flex min-h-48 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg">
+
+          <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-2xl">
+            📢
+          </span>
+
+          <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-700">
+            Notice Board
+          </h3>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Latest notices and important announcements from trainers.
+          </p>
+
+          <span class="mt-auto flex items-center gap-2 pt-5 text-sm font-semibold text-indigo-600">
+            Open Module →
+          </span>
+        </a>
+
+        <!-- Team Directory -->
+        <a href="modules/team-directory/team.html"
+          class="group flex min-h-48 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg">
+
+          <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-sky-100 text-2xl">
+            👥
+          </span>
+
+          <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-700">
+            Team Directory
+          </h3>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Meet your teammates and find everyone in the batch.
+          </p>
+
+          <span class="mt-auto flex items-center gap-2 pt-5 text-sm font-semibold text-indigo-600">
+            Open Module →
+          </span>
+        </a>
+
+        <!-- Leave Request -->
+        <a href="modules/leave-request/leave.html"
+          class="group flex min-h-48 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg">
+
+          <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-rose-100 text-2xl">
+            🗓️
+          </span>
+
+          <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-700">
+            Leave Request
+          </h3>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Apply for leave and check the status of your requests.
+          </p>
+
+          <span class="mt-auto flex items-center gap-2 pt-5 text-sm font-semibold text-indigo-600">
+            Open Module →
+          </span>
+        </a>
+
+        <!-- Daily Update -->
+        <a href="modules/daily-update/daily.html"
+          class="group flex min-h-48 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg">
+
+          <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-2xl">
+            📝
+          </span>
+
+          <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-700">
+            Daily Update
+          </h3>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Share today's work, progress and blockers with your team.
+          </p>
+
+          <span class="mt-auto flex items-center gap-2 pt-5 text-sm font-semibold text-indigo-600">
+            Open Module →
+          </span>
+        </a>
+
+        <!-- Doubts Board -->
+        <a href="modules/doubts-board/doubts.html"
+          class="group flex min-h-48 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg">
+
+          <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-violet-100 text-2xl">
+            💬
+          </span>
+
+          <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-700">
+            Doubts Board
+          </h3>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Ask questions, share answers and learn from one another.
+          </p>
+
+          <span class="mt-auto flex items-center gap-2 pt-5 text-sm font-semibold text-indigo-600">
+            Open Module →
+          </span>
+        </a>
+
+        <!-- Events -->
+        <a href="modules/events/events.html"
+          class="group flex min-h-48 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg">
+
+          <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-2xl">
+            🎯
+          </span>
+
+          <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-700">
+            Events
+          </h3>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Discover upcoming events, activities and batch sessions.
+          </p>
+
+          <span class="mt-auto flex items-center gap-2 pt-5 text-sm font-semibold text-indigo-600">
+            Open Module →
+          </span>
+        </a>
+
+        <!-- Resources -->
+        <a href="modules/resources/resources.html"
+          class="group flex min-h-48 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg sm:col-span-2 lg:col-span-1">
+
+          <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-100 text-2xl">
+            📚
+          </span>
+
+          <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-700">
+            Resources
+          </h3>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Find useful learning links, references and study materials.
+          </p>
+
+          <span class="mt-auto flex items-center gap-2 pt-5 text-sm font-semibold text-indigo-600">
+            Open Module →
+          </span>
+        </a>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-10 border-t border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-6 text-center sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:text-left">
+
+      <p class="text-sm font-semibold text-slate-700">
+        Fresher Hub
+      </p>
+
+      <p class="text-xs text-slate-500">
+        Cloudus Infotech fresher batch ·
+        <span id="currentYear"></span>
+      </p>
+
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const mainNavigation = document.getElementById("mainNavigation");
+    const currentYear = document.getElementById("currentYear");
+    const header = document.getElementById("header-bar");
+
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-bar').innerHTML = data;
+      });
+
+    // Mobile navigation toggle
+
+    menuButton.addEventListener("click", () => {
+      const isExpanded =
+        menuButton.getAttribute("aria-expanded") === "true";
+
+      menuButton.setAttribute("aria-expanded", String(!isExpanded));
+
+      mainNavigation.classList.toggle("hidden");
+      mainNavigation.classList.toggle("flex");
+    });
+
+    // Close menu after clicking a navigation link
+    mainNavigation.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 768) {
+          mainNavigation.classList.add("hidden");
+          mainNavigation.classList.remove("flex");
+
+          menuButton.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+
+    // Dynamic footer year
+    currentYear.textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
+
