@@ -37,9 +37,8 @@ function renderDoubts() {
       const isSolved = doubt.status === "solved";
 
       return `
-        <article>
-          <a
-            href="#doubt-${doubt.id}"
+        <article class="mb-3">
+          <div
             class="block bg-primaryLight hover:bg-primaryHover border border-primaryBorder rounded-lg p-4 transition"
           >
             <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
@@ -69,7 +68,7 @@ function renderDoubts() {
                 }
               </div>
             </div>
-          </a>
+          </div>
         </article>
       `;
     })
@@ -129,8 +128,6 @@ filterButtons.forEach((btn) => {
 doubtsList.addEventListener("click", async (e) => {
   const solveBtn = e.target.closest(".solve-btn");
   if (!solveBtn) return;
-
-  e.preventDefault();
   const id = solveBtn.dataset.id;
 
   try {
