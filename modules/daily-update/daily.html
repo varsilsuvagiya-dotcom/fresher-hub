@@ -8,9 +8,50 @@
   <link rel="stylesheet" href="../../styles.css">
 </head>
 <body>
+  <h1>Fresher Hub</h1>
+  <nav>
+    <a href="../notice-board/notice.html">Notice Board</a>
+    <a href="../team-directory/team.html">Team Directory</a>
+    <a href="../leave-request/leave.html">Leave Request</a>
+    <a href="../daily-update/daily.html">Daily Update</a>
+    <a href="../doubts-board/doubts.html">Doubts Board</a>
+    <a href="../events/events.html">Events</a>
+    <a href="../resources/resources.html">Resources</a>
+  </nav>
   <a href="../../index.html">&larr; Home</a>
-  <h1>daily-update</h1>
-  <div id="app"></div>
+
+  <h1>Daily update</h1>
+  <div id="app" style="display: flex; align-items: flex-start;">
+    <form id="updateForm" style="border: 1px solid black; width: 100%; padding: 10px 10px;">
+      <h3>Today's update</h3>
+      
+      <div class="form-row">
+        <div class="formGroup">
+          <label for="Name" style="display: flex;">Name</label>
+          <input type="text" placeholder="[Name]" id="inpName">
+        </div>
+        <div>
+          <label for="date">Date</label>
+          <input type="date" id="inpDate" style="display: flex;">
+        </div>
+      </div>
+      <div>
+        <label for="description">What I did today</label>
+        <textarea name="description" id="description" placeholder="[Work completed]" style="display: flex;"></textarea>
+      </div>
+      <div>
+        <label for="blocked">Blocked on</label>
+        <input type="text" placeholder="[Blocker, or Nothing]" style="display: flex;" id="blocked">
+      </div>
+      <div>
+        <button type="submit" id="subBtn">Submit</button>
+      </div>
+    </form>
+    <div style="margin: 0px 100px; width: 100%;">
+      <div id="updatesList"></div>
+    </div>
+  </div>
+
   <script src="daily.js"></script>
 </body>
 </html>

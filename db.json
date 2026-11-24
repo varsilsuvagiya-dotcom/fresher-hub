@@ -1,1 +1,31 @@
-{"notices":[],"team":[],"leaves":[],"updates":[],"doubts":[],"events":[],"resources":[]}
+{
+  "notices": [],
+  "team": [],
+  "leaves": [],
+  "updates": [
+    {
+      "date": "2026-11-23",
+      "name": "Nij",
+      "description": "fresherhub",
+      "blocked": "nothing",
+      "id": 1
+    },
+    {
+      "date": "2026-11-23",
+      "name": "Jil",
+      "description": "cad",
+      "blocked": "nothing",
+      "id": 2
+    },
+    {
+      "date": "2026-11-24",
+      "name": "krunal",
+      "description": "laravel",
+      "blocked": "nothing",
+      "id": 3
+    }
+  ],
+  "doubts": [],
+  "events": [],
+  "resources": []
+}
