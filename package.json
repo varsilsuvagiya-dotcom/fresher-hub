@@ -6,7 +6,7 @@
     "api": "json-server --watch db.json --port 3000",
     "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch"
   },
-  "devDependencies": {
+  "dependencies": {
     "json-server": "^0.17.4"
   },
   "description": "",
