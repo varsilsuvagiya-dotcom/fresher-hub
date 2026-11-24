@@ -4,24 +4,24 @@
   "leaves": [],
   "updates": [
     {
-      "date": "2026-11-23",
+      "date": "2026-11-24",
       "name": "Nij",
-      "description": "fresherhub",
-      "blocked": "nothing",
+      "description": "daily-update page",
+      "blocked": "none",
       "id": 1
     },
     {
-      "date": "2026-11-23",
+      "date": "2026-11-24",
       "name": "Jil",
-      "description": "cad",
-      "blocked": "nothing",
+      "description": "Completed cad design",
+      "blocked": "when creating a layout for machine",
       "id": 2
     },
     {
-      "date": "2026-11-24",
+      "date": "2026-11-23",
       "name": "krunal",
-      "description": "laravel",
-      "blocked": "nothing",
+      "description": "done his tasks",
+      "blocked": "none",
       "id": 3
     }
   ],

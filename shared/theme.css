@@ -1,4 +1,4 @@
 :root { --primary: #4f46e5; --bg: #f8fafc; --text: #0f172a; }
 body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 1rem; }
 nav { display: flex; flex-wrap: wrap; gap: .5rem; }
-a { color: var(--primary); }
+
