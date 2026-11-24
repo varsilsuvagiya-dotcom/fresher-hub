@@ -8,9 +8,46 @@
   <link rel="stylesheet" href="../../styles.css">
 </head>
 <body>
+  <header>
+
+  </header>
   <a href="../../index.html">&larr; Home</a>
   <h1>leave-request</h1>
-  <div id="app"></div>
+  <div id="app">
+    <main>
+    <section>
+      <form id="leave-form">
+
+        <label>Your Name</label>
+        <input id="name" type="text" placeholder="Name" required>
+
+        <div id="date-time">
+
+          <label>From</label>
+          <input id="from" type="date">
+
+          <label>To</label>
+          <input id="to" type="date">
+
+        </div>
+
+        <label>Reason</label>
+        <textarea id="message" placeholder="Write your reason..."></textarea>
+        
+        <div>
+           <button id="sub" type="submit">Apply</button>
+        </div>
+      </form>
+    </section>
+    <secion>
+      <h2>My Requests</h2>
+      <table id="leave-list">
+
+
+      </table>
+    </secion>
+  </main>
+  </div>
   <script src="leave.js"></script>
 </body>
 </html>
