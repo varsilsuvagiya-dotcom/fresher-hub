@@ -6,6 +6,8 @@ const to_date = document.querySelector("#to");
 const status = document.querySelector("#status");
 const message = document.querySelector("#message");
 const table = document.querySelector("#leave-list");
+const status_filter = document.querySelector("#status-filtered");
+
 
 const api_url = "http://localhost:3000/leaves";
 
@@ -62,21 +64,42 @@ async function add_leave_request(leave_data){
    
 }
 
-async function fetch_leave(){
 
-    try{
+status_filter.addEventListener("change", () => {
+    fetch_leave();
+});
+
+async function fetch_leave() {
+
+    try {
+
         const response = await fetch(api_url);
 
         const data = await response.json();
 
-        data.forEach(element => {
-            console.log(element)
-        });
-        list_leaves(data);
-        
+        const selected_status = status_filter.value;
+
+        let filtered_data;
+
+        if (selected_status === "all") {
+
+            filtered_data = data;
+
+        } else {
+
+            filtered_data = data.filter(item => {
+                return item.status === selected_status;
+            });
+
+        }
+
+        list_leaves(filtered_data);
+
     }
-    catch(e){
+    catch(e) {
+
         console.log(e.message);
+
     }
 
 }
