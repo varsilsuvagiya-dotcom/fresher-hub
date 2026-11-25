@@ -26,6 +26,21 @@ async function loadHeader() {
 }
 
 loadHeader();
+// -------------------------load Header----------------------------
+async function loadFooter() {
+  try {
+    const response = await fetch("../../footer.html");
+    if (!response.ok) {
+      throw new Error("Header loading failed");
+    }
+    const footerHTML = await response.text();
+
+    document.getElementById("footer").innerHTML = footerHTML;
+  } catch (error) {
+    console.error(error);
+  }
+}
+loadFooter();
 //Get Team meber list
 async function getTeamMember() {
   try {
