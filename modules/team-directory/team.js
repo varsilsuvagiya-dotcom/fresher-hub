@@ -92,7 +92,7 @@ function displayTeamMembers(teams) {
     teamContainer.appendChild(card);
   });
 }
-// getTeamMember();
+getTeamMember();
 
 //search team member name
 searchInput.addEventListener("input", (event) => {
@@ -104,13 +104,13 @@ searchInput.addEventListener("input", (event) => {
 });
 
 //add team member api
-async function addTeamMember() {
-  const newMember = {
-    name: "Ravi Patel",
-    track: "Java Developer",
-    skills: ["Java", "Spring Boot", "SQL"],
-    image: "https://i.pravatar.cc/150?img=12",
-  };
+async function addTeamMember(newMember) {
+  // const newMember = {
+  //   name: "Ravi Patel",
+  //   track: "Java Developer",
+  //   skills: ["Java", "Spring Boot", "SQL"],
+  //   image: "https://i.pravatar.cc/150?img=12",
+  // };
   try {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -121,12 +121,20 @@ async function addTeamMember() {
     });
     if (!response.ok) {
       throw new Error("Adding team member failed");
-    } else {
-      if (response.ok) {
-        console.log("Team member added successfully!");
-      }
     }
-    const headerHTML = await response.text();
+    if (response.ok) {
+      const savedMember = await response.json();
+      console.log(savedMember);
+
+      // teamMembers.push(savedMember);
+      // displayTeamMembers(teamMembers);
+
+      // Close modal
+      // hideModal();
+
+      alert("Team member added successfully!");
+      console.log("Team member added successfully!");
+    }
   } catch (error) {
     console.error(error);
   }
@@ -147,4 +155,18 @@ function hideModal() {
   // memberForm.reset();
 }
 
-// addTeamMember();
+memberForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const saveButton = document.getElementById("saveTeam");
+  const addMember = {
+    name: document.getElementById("memberName").value.trim(),
+    track: document.getElementById("memberTrack").value,
+    skills: document
+      .getElementById("memberSkills")
+      .value.split(",")
+      .map((skill) => skill.trim())
+      .filter((skill) => skill !== ""),
+    image: document.getElementById("memberImage").value.trim(),
+  };
+   addTeamMember(addMember);
+});

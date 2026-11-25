@@ -1,15 +1,131 @@
 {
   "notices": [],
-  "team": [ {
-       "name": "Pragna Vaghasiya",
+  "team": [
+    {
+      "name": "Pragna Vaghasiya",
       "track": "Node",
-      "skills": ["HTML", "CSS", "JavaScript"],
-      "image": ""
-    },{
-       "name": "Ravi Patel",
-    "track": "Java",
-    "skills": ["Java", "Spring Boot", "SQL"],
-    "image": "https://i.pravatar.cc/150?img=12"
+      "skills": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "image": "",
+      "id": "kirkYO2exvw"
+    },
+    {
+      "name": "Ravi Patel",
+      "track": "Java",
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "SQL"
+      ],
+      "image": "https://i.pravatar.cc/150?img=12",
+      "id": "6jX0POafdUU"
+    },
+    {
+      "name": "Pragna Patel",
+      "track": "Node",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JS",
+        "React"
+      ],
+      "image": "https://i.pravatar.cc/150?img=5",
+      "id": "JA3srPv8fio"
+    },
+    {
+      "name": "Pragna Patel",
+      "track": "Node",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JS",
+        "React"
+      ],
+      "image": "https://i.pravatar.cc/150?img=5",
+      "id": "5ZZSCvTiD6w"
+    },
+    {
+      "name": "Pragna Patel",
+      "track": "Python",
+      "skills": [
+        "JS",
+        "PYTHON"
+      ],
+      "image": "https://i.pravatar.cc/150?img=5",
+      "id": "ir4eYrxeKAs"
+    },
+    {
+      "name": "Pragna Patel",
+      "track": "Node",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JS",
+        "React"
+      ],
+      "image": "https://i.pravatar.cc/150?img=5",
+      "id": "AF9t3ftAVIY"
+    },
+    {
+      "name": "Pragna Patel",
+      "track": "Laravel",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JS",
+        "React"
+      ],
+      "image": "https://i.pravatar.cc/150?img=5",
+      "id": "79SQruTYBlY"
+    },
+    {
+      "name": "Pragna Patel",
+      "track": "Laravel",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JS",
+        "React"
+      ],
+      "image": "https://i.pravatar.cc/150?img=5",
+      "id": "p7BTR-9AV08"
+    },
+    {
+      "name": "Pragna Patel",
+      "track": "Java",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JS",
+        "Java"
+      ],
+      "image": "https://i.pravatar.cc/150?img=5",
+      "id": "CEs9NX0MkeA"
+    },
+    {
+      "name": "aaa",
+      "track": "React",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JS",
+        "React"
+      ],
+      "image": "https://i.pravatar.cc/150?img=5",
+      "id": "cLXiEERzZz4"
+    },
+    {
+      "name": "aaabb",
+      "track": "Laravel",
+      "skills": [
+        "JS",
+        "PYTHON"
+      ],
+      "image": "https://i.pravatar.cc/150?img=5",
+      "id": "0cQxCg4j1aE"
     }
   ],
   "leaves": [
@@ -20,7 +136,7 @@
       "reason": "sick leave",
       "status": "pending",
       "created_at": "2026-11-24T05:42:03.650Z",
-      "id": 1
+      "id": "1"
     },
     {
       "name": "dev",
@@ -29,7 +145,7 @@
       "reason": "travelling",
       "status": "rejected",
       "created_at": "2026-11-24T06:17:50.359Z",
-      "id": 2
+      "id": "2"
     },
     {
       "name": "prath",
@@ -38,7 +154,7 @@
       "reason": "family function",
       "status": "accepted",
       "created_at": "2026-11-24T07:09:23.600Z",
-      "id": 3
+      "id": "3"
     },
     {
       "name": "p",
@@ -47,7 +163,7 @@
       "reason": "hospitalize ",
       "status": "pending",
       "created_at": "2026-11-24T08:45:44.769Z",
-      "id": 4
+      "id": "4"
     },
     {
       "name": "prr",
@@ -56,7 +172,7 @@
       "reason": "On trip",
       "status": "pending",
       "created_at": "2026-11-24T08:46:15.687Z",
-      "id": 5
+      "id": "5"
     },
     {
       "name": "vyas",
@@ -65,7 +181,7 @@
       "reason": "mini trip",
       "status": "pending",
       "created_at": "2026-11-24T08:46:43.049Z",
-      "id": 6
+      "id": "6"
     },
     {
       "name": "abc",
@@ -74,7 +190,7 @@
       "reason": "sick leave",
       "status": "pending",
       "created_at": "2026-11-24T08:47:30.181Z",
-      "id": 7
+      "id": "7"
     },
     {
       "name": "Pratham Vyas",
@@ -83,7 +199,7 @@
       "reason": "mini trip",
       "status": "rejected",
       "created_at": "2026-11-24T09:52:33.672Z",
-      "id": 8
+      "id": "8"
     }
   ],
   "updates": [
@@ -92,7 +208,7 @@
       "name": "Nij",
       "description": "daily-update page",
       "blocked": "nothing",
-      "id": 1
+      "id": "1"
     },
     {
       "date": "2026-11-24",
@@ -106,7 +222,7 @@
       "name": "krunal",
       "description": "done his tasks",
       "blocked": "nothing",
-      "id": 3
+      "id": "3"
     }
   ],
   "doubts": [],
