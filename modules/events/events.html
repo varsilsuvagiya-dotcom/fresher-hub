@@ -3,14 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>events</title>
-  <link rel="stylesheet" href="../../shared/theme.css">
-  <link rel="stylesheet" href="../../styles.css">
+  <title>Events | Fresher Hub</title>
+    <link rel="stylesheet" href="../../shared/theme.css">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../src/output.css">
 </head>
 <body>
-  <a href="../../index.html">&larr; Home</a>
+  <div id="header-bar" class="sticky top-0 z-50"></div>
   <h1>events</h1>
-  <div id="app"></div>
+  <div id="app">
+    <form id="eventForm">
+      <h3>Add an event</h3>
+
+      <div>
+        <label for="eventName">Event name</label>
+        <input type="text" placeholder="[Event name]" id="inpEvent">
+      </div>
+      <div>
+        <div>
+          <label for="date">Date</label>
+          <input type="date" id="inpDate">
+        </div>
+        <div>
+          <label for="time">Time</label>
+          <input type="time" id="inpTime">
+        </div>
+      </div>
+      <div>
+        <label for="place">Place</label>
+        <input type="text" placeholder="[Room or online link]" id="inpText">
+      </div>
+      <div>
+        <button type="submit" id="subBtn">Add event</button>
+      </div>
+    </form>
+  </div>
+  <div id="eventList"></div>
+
   <script src="events.js"></script>
 </body>
 </html>

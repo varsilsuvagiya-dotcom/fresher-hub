@@ -9,7 +9,7 @@ const table = document.querySelector("#leave-list");
 const status_filter = document.querySelector("#status-filtered");
 
 
-const api_url = "http://localhost:3000/leaves";
+const api_url = "https://fresher-hub-api-cloudus.onrender.com/leaves";
 
 
 //header function 
@@ -19,34 +19,61 @@ fetch('../../header.html')
         document.getElementById('header-bar').innerHTML = data;
       });
 
-leave_form.addEventListener("submit",(e) => {
 
-    e.preventDefault();
-    
-    console.log(`name:- ${namee.value}, from:- ${from_date.value}, to:- ${to_date.value}, reason:- ${message.value}`);
+// Date validation
+from_date.addEventListener("change", () => {
 
-    add_leave_request({
-        "name":namee.value,
-        "from":from_date.value,
-        "to":to_date.value,
-        "reason":message.value,
-        "status":status.value,
-        "created_at": new Date().toISOString()
-    });
-    
-    leave_form.reset();
-    fetch_leave();
-    
+    to_date.min = from_date.value;
+
+    if (to_date.value && to_date.value < from_date.value) {
+        to_date.value = "";
+    }
 
 });
 
-async function add_leave_request(leave_data){
-    try{
-        const response = await fetch(api_url,{
 
-            method:"POST",
+leave_form.addEventListener("submit", async (e) => {
 
-            headers:{
+    e.preventDefault();
+
+    if (!namee.value || !from_date.value || !to_date.value || !message.value || !status.value) {
+        alert("Please fill all the fields.");
+        return;
+    }
+
+    if (to_date.value < from_date.value) {
+        alert("To date cannot be earlier than From date.");
+        return;
+    }
+
+    console.log(`name:- ${namee.value}, from:- ${from_date.value}, to:- ${to_date.value}, reason:- ${message.value}`);
+
+    const success = await add_leave_request({
+        name: namee.value,
+        from: from_date.value,
+        to: to_date.value,
+        reason: message.value,
+        status: status.value,
+        created_at: new Date().toISOString()
+    });
+
+    if (success) {
+        leave_form.reset();
+        to_date.min = "";
+        await fetch_leave();
+    }
+
+});
+
+async function add_leave_request(leave_data) {
+
+    try {
+
+        const response = await fetch(api_url, {
+
+            method: "POST",
+
+            headers: {
                 "Content-Type": "application/json"
             },
 
@@ -54,14 +81,27 @@ async function add_leave_request(leave_data){
 
         });
 
+        if (!response.ok) {
+            throw new Error("Failed to submit leave request");
+        }
+
         const data = await response.json();
 
         console.log(data);
+
+        return true;
+
     }
-    catch(e){
-        console.log(e);
+    catch (e) {
+
+        console.log(e.message);
+
+        alert("Unable to submit leave request.");
+
+        return false;
+
     }
-   
+
 }
 
 
@@ -76,6 +116,17 @@ async function fetch_leave() {
         const response = await fetch(api_url);
 
         const data = await response.json();
+
+        if (data.length === 0) {
+            table.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center py-6 text-slate-500">
+                        No leave requests found.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
 
         const selected_status = status_filter.value;
 
@@ -109,7 +160,7 @@ function list_leaves(data) {
 
     table.innerHTML = "";
 
-    const columns = ["from", "to", "reason", "status"];
+    const columns = ["name","from", "to", "reason", "status"];
 
     const header = document.createElement("tr");
 
@@ -153,7 +204,7 @@ function list_leaves(data) {
 
                 const status = document.createElement("span");
 
-                status.textContent = item.status;
+                status.textContent = item.status ?? "-";
 
                 if (item.status === "accepted") {
                     status.className = "inline-flex px-3 py-1 rounded-full text-xs font-medium bg-green-300 text-green-700 capitalize";
