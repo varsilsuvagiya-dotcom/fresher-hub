@@ -1,1 +1,31 @@
-{"notices":[],"team":[],"leaves":[],"updates":[],"doubts":[],"events":[],"resources":[]}
+{
+  "notices": [],
+  "team": [],
+  "leaves": [],
+  "updates": [
+    {
+      "date": "2026-11-24",
+      "name": "Nij",
+      "description": "daily-update page",
+      "blocked": "none",
+      "id": 1
+    },
+    {
+      "date": "2026-11-24",
+      "name": "Jil",
+      "description": "Completed cad design",
+      "blocked": "when creating a layout for machine",
+      "id": 2
+    },
+    {
+      "date": "2026-11-23",
+      "name": "krunal",
+      "description": "done his tasks",
+      "blocked": "none",
+      "id": 3
+    }
+  ],
+  "doubts": [],
+  "events": [],
+  "resources": []
+}
