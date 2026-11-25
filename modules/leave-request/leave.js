@@ -9,7 +9,7 @@ const table = document.querySelector("#leave-list");
 const status_filter = document.querySelector("#status-filtered");
 
 
-const api_url = "http://localhost:3000/leaves";
+const api_url = "https://fresher-hub-api-cloudus.onrender.com/leaves";
 
 
 //header function 
