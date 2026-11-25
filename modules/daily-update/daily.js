@@ -11,7 +11,7 @@ let updatesList = document.querySelector("#updatesList");
 let updateCount = document.querySelector("#updateCount");
 let emptyState = document.querySelector("#emptyState");
 
-const API_URL = "http://localhost:3000/updates";
+const API_URL = "https://fresher-hub-api-cloudus.onrender.com/updates";
 
 fetch('../../header.html')
     .then(response => response.text())
@@ -20,7 +20,17 @@ fetch('../../header.html')
     });
 
 // Set today's date by default
-inpDate.value = new Date().toISOString().split("T")[0];
+// Today's date in the user's LOCAL timezone (YYYY-MM-DD)
+function getTodayLocal() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+// Set today's date by default
+inpDate.value = getTodayLocal();
 
 // Update header counter + empty state visibility
 function setSummary(total) {
@@ -265,15 +275,41 @@ function displayUpdates(data) {
 
 }
 
+// Shows a validation message
+function showFieldError(input, message) {
+    input.value = "";                 // clear the spaces so the placeholder shows
+    input.setCustomValidity(message);
+    input.reportValidity();
+    input.focus();
+}
+
+// Clear the custom massage
+[inpName, description].forEach((field) => {
+    field.addEventListener("input", () => field.setCustomValidity(""));
+});
+
 // Submit daily update
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
+    const name = inpName.value.trim();
+    const work = description.value.trim();
+
+    if (!name) {
+        showFieldError(inpName, "Please enter your name.");
+        return;
+    }
+
+    if (!work) {
+        showFieldError(description, "Please describe what you did today.");
+        return;
+    }
+
     const newUpdate = {
         date: inpDate.value,
-        name: inpName.value.trim(),
-        description: description.value.trim(),
+        name: name,
+        description: work,
         blocked: blocked.value.trim()
     };
 
@@ -304,7 +340,7 @@ form.addEventListener("submit", async (e) => {
 
         // Reset form (keep date defaulted to today)
         form.reset();
-        inpDate.value = new Date().toISOString().split("T")[0];
+        inpDate.value = getTodayLocal();
 
         // Refresh update history
         await getUpdates();
@@ -320,10 +356,8 @@ form.addEventListener("submit", async (e) => {
 
     }
     finally {
-
         subBtn.disabled = false;
         subBtn.textContent = "Submit Daily Update →";
-
     }
 });
 
