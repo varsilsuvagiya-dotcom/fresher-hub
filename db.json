@@ -1,6 +1,17 @@
 {
   "notices": [],
-  "team": [],
+  "team": [ {
+       "name": "Pragna Vaghasiya",
+      "track": "Node",
+      "skills": ["HTML", "CSS", "JavaScript"],
+      "image": ""
+    },{
+       "name": "Ravi Patel",
+    "track": "Java",
+    "skills": ["Java", "Spring Boot", "SQL"],
+    "image": "https://i.pravatar.cc/150?img=12"
+    }
+  ],
   "leaves": [
     {
       "name": "Pratham Vyas",
@@ -88,7 +99,7 @@
       "name": "Jil",
       "description": "Completed cad design",
       "blocked": "when creating a layout for machine",
-      "id": 2
+      "id": "2"
     },
     {
       "date": "2026-11-23",
@@ -100,5 +111,6 @@
   ],
   "doubts": [],
   "events": [],
-  "resources": []
+  "resources": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
