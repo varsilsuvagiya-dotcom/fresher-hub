@@ -1,9 +1,4 @@
-
 const API_URL = "https://fresher-hub-api-cloudus.onrender.com/resources";
-<<<<<<< HEAD
-// const API_URL = "http://localhost:3000/resources";
-=======
->>>>>>> origin/main
 
 const resourceContainer = document.getElementById("resourceContainer");
 const resourceForm = document.getElementById("resourceForm");
@@ -11,7 +6,6 @@ const searchInput = document.getElementById("searchInput");
 
 let resources = [];
 
-<<<<<<< HEAD
 // Load shared header
 fetch("../../header.html")
   .then((response) => response.text())
@@ -19,8 +13,6 @@ fetch("../../header.html")
     document.getElementById("header").innerHTML = data;
   })
   .catch((error) => console.error("Header error:", error));
-=======
->>>>>>> origin/main
 
 // ================================
 // LOAD SHARED HEADER
@@ -45,8 +37,7 @@ async function loadHeader() {
 
     if (menuButton && mainNavigation) {
       menuButton.addEventListener("click", () => {
-        const expanded =
-          menuButton.getAttribute("aria-expanded") === "true";
+        const expanded = menuButton.getAttribute("aria-expanded") === "true";
 
         menuButton.setAttribute("aria-expanded", String(!expanded));
 
@@ -54,7 +45,7 @@ async function loadHeader() {
         mainNavigation.classList.toggle("flex");
       });
 
-      mainNavigation.querySelectorAll("a").forEach(link => {
+      mainNavigation.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => {
           if (window.innerWidth < 768) {
             mainNavigation.classList.add("hidden");
@@ -66,15 +57,13 @@ async function loadHeader() {
     }
 
     // Fix nested module navigation paths
-    headerContainer.querySelectorAll('a[href^="modules/"]').forEach(link => {
+    headerContainer.querySelectorAll('a[href^="modules/"]').forEach((link) => {
       link.href = "../../" + link.getAttribute("href");
     });
-
   } catch (error) {
     console.error("Header Error:", error);
   }
 }
-
 
 // ================================
 // LOAD SHARED FOOTER
@@ -99,7 +88,7 @@ async function loadFooter() {
     footerContainer.innerHTML = html;
 
     // Fix all footer relative links
-    footerContainer.querySelectorAll("a").forEach(link => {
+    footerContainer.querySelectorAll("a").forEach((link) => {
       const href = link.getAttribute("href");
 
       if (href && href.startsWith("./")) {
@@ -113,12 +102,10 @@ async function loadFooter() {
     if (currentYear) {
       currentYear.textContent = new Date().getFullYear();
     }
-
   } catch (error) {
     console.error("Footer Error:", error);
   }
 }
-
 
 // ================================
 // FETCH RESOURCES
@@ -152,7 +139,6 @@ async function fetchResources() {
   }
 }
 
-
 // ================================
 // DISPLAY RESOURCES
 // ================================
@@ -184,8 +170,7 @@ function displayResources(data) {
 
     const description = document.createElement("p");
     description.className = "text-gray-600 text-sm mb-4";
-    description.textContent =
-      resource.description || "No description available.";
+    description.textContent = resource.description || "No description available.";
 
     const link = document.createElement("a");
     link.href = resource.url;
@@ -203,24 +188,17 @@ function displayResources(data) {
       deleteResource(resource.id);
     });
 
-    card.append(
-      topic,
-      title,
-      description,
-      link,
-      deleteButton
-    );
+    card.append(topic, title, description, link, deleteButton);
 
     resourceContainer.appendChild(card);
   });
 }
 
-
 // ================================
 // ADD NEW RESOURCE
 // ================================
 
-resourceForm.addEventListener("submit", async event => {
+resourceForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const newResource = {
@@ -247,22 +225,18 @@ resourceForm.addEventListener("submit", async event => {
     resourceForm.reset();
 
     await fetchResources();
-
   } catch (error) {
     console.error("Add Resource Error:", error);
     alert("Unable to add resource.");
   }
 });
 
-
 // ================================
 // DELETE RESOURCE
 // ================================
 
 async function deleteResource(id) {
-  const confirmDelete = confirm(
-    "Are you sure you want to delete this resource?"
-  );
+  const confirmDelete = confirm("Are you sure you want to delete this resource?");
 
   if (!confirmDelete) return;
 
@@ -276,13 +250,11 @@ async function deleteResource(id) {
     }
 
     await fetchResources();
-
   } catch (error) {
     console.error("Delete Error:", error);
     alert("Unable to delete resource.");
   }
 }
-
 
 // ================================
 // SEARCH RESOURCES
@@ -291,21 +263,16 @@ async function deleteResource(id) {
 searchInput.addEventListener("input", () => {
   const searchValue = searchInput.value.trim().toLowerCase();
 
-  const filteredResources = resources.filter(resource => {
+  const filteredResources = resources.filter((resource) => {
     const title = (resource.title || "").toLowerCase();
     const topic = (resource.topic || "").toLowerCase();
     const description = (resource.description || "").toLowerCase();
 
-    return (
-      title.includes(searchValue) ||
-      topic.includes(searchValue) ||
-      description.includes(searchValue)
-    );
+    return title.includes(searchValue) || topic.includes(searchValue) || description.includes(searchValue);
   });
 
   displayResources(filteredResources);
 });
-
 
 // ================================
 // INITIALIZE MODULE

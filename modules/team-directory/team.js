@@ -3,6 +3,11 @@ const API_URL = "http://localhost:3000/team";
 const teamContainer = document.getElementById("teamContainer");
 const searchInput = document.getElementById("searchInput");
 const message = document.getElementById("message");
+
+const memberModal = document.getElementById("memberModal");
+
+const openModal = document.getElementById("openModal");
+
 let teamMembers;
 let debounceTimer;
 // -------------------------load Header----------------------------
@@ -21,6 +26,7 @@ async function loadHeader() {
 }
 
 loadHeader();
+//Get Team meber list
 async function getTeamMember() {
   try {
     message.textContent = "Loading...";
@@ -36,6 +42,7 @@ async function getTeamMember() {
     console.error(error);
   }
 }
+//show team list
 function displayTeamMembers(teams) {
   teamContainer.innerHTML = "";
   console.log(teams);
@@ -70,8 +77,9 @@ function displayTeamMembers(teams) {
     teamContainer.appendChild(card);
   });
 }
-getTeamMember();
+// getTeamMember();
 
+//search team member name
 searchInput.addEventListener("input", (event) => {
   clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
@@ -80,6 +88,7 @@ searchInput.addEventListener("input", (event) => {
   }, 500);
 });
 
+//add team member api
 async function addTeamMember() {
   const newMember = {
     name: "Ravi Patel",
@@ -107,4 +116,20 @@ async function addTeamMember() {
     console.error(error);
   }
 }
+
+//modal
+// Open Modal
+openModal.addEventListener("click", () => {
+  console.log("click");
+
+  memberModal.classList.remove("hidden");
+  memberModal.classList.add("flex");
+});
+// Close Modal Function
+function hideModal() {
+  memberModal.classList.add("hidden");
+  memberModal.classList.remove("flex");
+  // memberForm.reset();
+}
+
 // addTeamMember();
