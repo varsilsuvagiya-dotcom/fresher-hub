@@ -1,16 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>team-directory</title>
-  <link rel="stylesheet" href="../../shared/theme.css">
-  <link rel="stylesheet" href="../../styles.css">
-</head>
-<body>
-  <a href="../../index.html">&larr; Home</a>
-  <h1>team-directory</h1>
-  <div id="app"></div>
-  <script src="team.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Team directory | Fresher Hu</title>
+    <!-- <link rel="stylesheet" href="../../shared/theme.css"> -->
+    <link rel="stylesheet" href="../../src/output.css" />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body class="min-h-screen bg-slate-50">
+    <div class="flex min-h-screen flex-col">
+      <!-- Shared Header -->
+      <div id="header"></div>
+      <main class="max-w-7xl flex-1 p-5 mx-auto w-full">
+        <section class="flex flex-col justify-between items-center sm:flex-row gap-4">
+          <h1 class="text-primary text-2xl sm:text-xl font-bold uppercase">Team directory</h1>
+          <div>
+            <button class="mr-1 bg-primary text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-primary/90">+ Add Team</button>
+            <input type="search" id="searchInput" placeholder="Search names..." class="w-full sm:w-80 rounded-lg border border-secondary bg-white px-4 py-2 text-heading placeholder:text-secondary focus:border-primary focus:outline-none" />
+          </div>
+        </section>
+        <section>
+          <!-- Cards -->
+          <div id="teamContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-5"></div>
+
+          <p id="message" class="text-center mt-8 text-secondary"></p>
+        </section>
+      </main>
+      <!-- Compact footer -->
+      <footer class="shrink-0 border-t border-secondary bg-white">
+        <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-2">
+          <p class="text-xs font-semibold text-primary">Fresher Hub</p>
+
+          <p class="text-xs text-secondary">Cloudus Infotech · Fresher Batch</p>
+        </div>
+      </footer>
+    </div>
+    <script src="team.js"></script>
+  </body>
 </html>

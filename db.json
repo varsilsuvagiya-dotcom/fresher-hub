@@ -88,7 +88,7 @@
       "name": "Jil",
       "description": "Completed cad design",
       "blocked": "when creating a layout for machine",
-      "id": 2
+      "id": "2"
     },
     {
       "date": "2026-11-23",
@@ -100,5 +100,6 @@
   ],
   "doubts": [],
   "events": [],
-  "resources": []
+  "resources": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }

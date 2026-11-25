@@ -1,5 +1,9 @@
 
 const API_URL = "https://fresher-hub-api-cloudus.onrender.com/resources";
+<<<<<<< HEAD
+// const API_URL = "http://localhost:3000/resources";
+=======
+>>>>>>> origin/main
 
 const resourceContainer = document.getElementById("resourceContainer");
 const resourceForm = document.getElementById("resourceForm");
@@ -7,6 +11,16 @@ const searchInput = document.getElementById("searchInput");
 
 let resources = [];
 
+<<<<<<< HEAD
+// Load shared header
+fetch("../../header.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.getElementById("header").innerHTML = data;
+  })
+  .catch((error) => console.error("Header error:", error));
+=======
+>>>>>>> origin/main
 
 // ================================
 // LOAD SHARED HEADER
@@ -127,7 +141,6 @@ async function fetchResources() {
     resources = await response.json();
 
     displayResources(resources);
-
   } catch (error) {
     console.error("Fetch Error:", error);
 
@@ -156,11 +169,10 @@ function displayResources(data) {
     return;
   }
 
-  data.forEach(resource => {
+  data.forEach((resource) => {
     const card = document.createElement("div");
 
-    card.className =
-      "bg-white p-5 rounded-xl shadow-sm border border-gray-200";
+    card.className = "bg-white p-5 rounded-xl shadow-sm border border-gray-200";
 
     const topic = document.createElement("p");
     topic.className = "text-sm font-semibold text-indigo-600 mb-2";
@@ -185,8 +197,7 @@ function displayResources(data) {
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.textContent = "Delete";
-    deleteButton.className =
-      "ml-4 text-red-600 text-sm font-semibold";
+    deleteButton.className = "ml-4 text-red-600 text-sm font-semibold";
 
     deleteButton.addEventListener("click", () => {
       deleteResource(resource.id);
@@ -217,16 +228,16 @@ resourceForm.addEventListener("submit", async event => {
     title: document.getElementById("title").value.trim(),
     url: document.getElementById("url").value.trim(),
     description: document.getElementById("description").value.trim(),
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
   };
 
   try {
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newResource)
+      body: JSON.stringify(newResource),
     });
 
     if (!response.ok) {
@@ -257,7 +268,7 @@ async function deleteResource(id) {
 
   try {
     const response = await fetch(`${API_URL}/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
     });
 
     if (!response.ok) {
