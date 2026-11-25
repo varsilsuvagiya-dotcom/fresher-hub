@@ -11,7 +11,7 @@ let updatesList = document.querySelector("#updatesList");
 let updateCount = document.querySelector("#updateCount");
 let emptyState = document.querySelector("#emptyState");
 
-const API_URL = "https://fresher-hub-api-cloudus.onrender.com/updates";
+const API_URL = "http://localhost:3000/updates";
 
 fetch('../../header.html')
     .then(response => response.text())
