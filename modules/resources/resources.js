@@ -1,6 +1,6 @@
 // resources module
 
-const API_URL = "http://localhost:3000/resources";
+const API_URL = "https://fresher-hub-api-cloudus.onrender.com/resources";
 
 const resourceContainer = document.getElementById("resourceContainer");
 const resourceForm = document.getElementById("resourceForm");
