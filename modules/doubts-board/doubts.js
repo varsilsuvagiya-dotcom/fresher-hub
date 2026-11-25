@@ -11,25 +11,43 @@ let allDoubts = [];
 let currentFilter = "all";
 let errorMessage = "";
 
+// helper clean
+function escapeHTML(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+// helper error showing
+function showFormError(message) {
+  const errorEl = document.getElementById("doubt-error");
+  if (!errorEl) return;
+
+  if (message) {
+    errorEl.textContent = message;
+    errorEl.classList.remove("hidden");
+  } else {
+    errorEl.textContent = "";
+    errorEl.classList.add("hidden");
+  }
+}
+
 async function fetchDoubts() {
   try {
     const response = await axios.get(API_URL);
     allDoubts = response.data;
-    errorMessage = "";
+    showFormError("");
     renderDoubts();
   } catch (error) {
     console.error("Failed to fetch doubts:", error);
-    errorMessage = "Failed to load doubts.";
-    renderDoubts();
+    doubtsList.innerHTML = `<p class="text-red-600 text-center py-4">Failed to load doubts.</p>`;
   }
 }
 
 function renderDoubts() {
-  if (errorMessage) {
-    doubtsList.innerHTML = `<p class="text-sm text-rose-600">${errorMessage}</p>`;
-    return;
-  }
-
   const filteredDoubts = [...allDoubts].reverse().filter((doubt) => {
     if (currentFilter === "open") return doubt.status === "open";
     if (currentFilter === "solved") return doubt.status === "solved";
@@ -53,10 +71,10 @@ function renderDoubts() {
             <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
               <div class="flex-1 min-w-0">
                 <p class="max-h-20 overflow-y-auto bg-white/80 rounded px-3 py-2 text-base font-semibold">
-                  ${doubt.text}
+                  ${escapeHTML(doubt.text)}
                 </p>
                 <footer class="mt-2 text-xs text-slate-600 shrink-0">
-                  ${doubt.topic} &middot; ${doubt.date}
+                  ${escapeHTML(doubt.topic)} &middot; ${escapeHTML(doubt.date)}
                 </footer>
               </div>
 
@@ -68,7 +86,7 @@ function renderDoubts() {
                   !isSolved
                     ? `<button
                         type="button"
-                        data-id="${doubt.id}"
+                        data-id="${escapeHTML(doubt.id)}"
                         class="solve-btn px-3 py-2 text-xs leading-6 font-medium border border-slate-300 rounded bg-white hover:bg-slate-100 transition cursor-pointer"
                       >
                         Mark solved
@@ -108,13 +126,12 @@ doubtForm.addEventListener("submit", async (e) => {
   try {
     const response = await axios.post(API_URL, newDoubt);
     allDoubts.push(response.data);
-    errorMessage = "";
+    showFormError("");
     doubtForm.reset();
     renderDoubts();
   } catch (error) {
     console.error("Failed to post doubt:", error);
-    errorMessage = "Failed to post doubt.";
-    renderDoubts();
+    showFormError("Failed to post doubt.");
   }
 });
 
@@ -148,12 +165,11 @@ doubtsList.addEventListener("click", async (e) => {
     allDoubts = allDoubts.map((doubt) =>
       String(doubt.id) === String(id) ? { ...doubt, status: "solved" } : doubt,
     );
-    errorMessage = "";
+    showFormError("");
     renderDoubts();
   } catch (error) {
     console.error("Failed to mark doubt as solved:", error);
-    errorMessage = "Failed to update doubt status.";
-    renderDoubts();
+    showFormError("Failed to update doubt status.");
   }
 });
 
