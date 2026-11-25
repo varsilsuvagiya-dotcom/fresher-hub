@@ -1,7 +1,80 @@
 {
   "notices": [],
   "team": [],
-  "leaves": [],
+  "leaves": [
+    {
+      "name": "Pratham Vyas",
+      "from": "2026-11-26",
+      "to": "2026-11-29",
+      "reason": "sick leave",
+      "status": "pending",
+      "created_at": "2026-11-24T05:42:03.650Z",
+      "id": 1
+    },
+    {
+      "name": "dev",
+      "from": "2026-11-29",
+      "to": "2026-12-06",
+      "reason": "travelling",
+      "status": "rejected",
+      "created_at": "2026-11-24T06:17:50.359Z",
+      "id": 2
+    },
+    {
+      "name": "prath",
+      "from": "2026-11-24",
+      "to": "2026-11-27",
+      "reason": "family function",
+      "status": "accepted",
+      "created_at": "2026-11-24T07:09:23.600Z",
+      "id": 3
+    },
+    {
+      "name": "p",
+      "from": "2026-11-26",
+      "to": "2026-11-28",
+      "reason": "hospitalize ",
+      "status": "pending",
+      "created_at": "2026-11-24T08:45:44.769Z",
+      "id": 4
+    },
+    {
+      "name": "prr",
+      "from": "2026-12-06",
+      "to": "2026-12-27",
+      "reason": "On trip",
+      "status": "pending",
+      "created_at": "2026-11-24T08:46:15.687Z",
+      "id": 5
+    },
+    {
+      "name": "vyas",
+      "from": "2026-11-25",
+      "to": "2026-11-29",
+      "reason": "mini trip",
+      "status": "pending",
+      "created_at": "2026-11-24T08:46:43.049Z",
+      "id": 6
+    },
+    {
+      "name": "abc",
+      "from": "2026-11-29",
+      "to": "2026-12-04",
+      "reason": "sick leave",
+      "status": "pending",
+      "created_at": "2026-11-24T08:47:30.181Z",
+      "id": 7
+    },
+    {
+      "name": "Pratham Vyas",
+      "from": "2026-11-20",
+      "to": "2026-11-29",
+      "reason": "mini trip",
+      "status": "rejected",
+      "created_at": "2026-11-24T09:52:33.672Z",
+      "id": 8
+    }
+  ],
   "updates": [
     {
       "date": "2026-11-24",
