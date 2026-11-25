@@ -75,7 +75,7 @@ async function getUpdates() {
     }
 }
 
-// Delete daily update
+// function for Delete daily update by its id
 async function deleteUpdate(id) {
 
     const confirmDelete = confirm("Are you sure you want to delete this update?");
@@ -108,7 +108,7 @@ function displayUpdates(data) {
 
     updatesList.innerHTML = "";
 
-    // Empty state (uses the static #emptyState block in the HTML)
+    // Empty state
     if (!data || data.length === 0) {
         setSummary(0);
         return;
