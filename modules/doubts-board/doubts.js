@@ -110,6 +110,11 @@ doubtForm.addEventListener("submit", async (e) => {
   const topic = doubtTopic.value;
   if (!text) return;
 
+  const submitBtn = doubtForm.querySelector('button[type="submit"]');
+  if (submitBtn && submitBtn.disabled) return;
+
+  const originalBtnText = submitBtn ? submitBtn.textContent : "Post Doubt";
+
   const today = new Date().toLocaleDateString("en-IN", {
     day: "2-digit",
     month: "short",
@@ -123,6 +128,11 @@ doubtForm.addEventListener("submit", async (e) => {
     status: "open",
   };
 
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Posting...";
+  }
+
   try {
     const response = await axios.post(API_URL, newDoubt);
     allDoubts.push(response.data);
@@ -132,6 +142,11 @@ doubtForm.addEventListener("submit", async (e) => {
   } catch (error) {
     console.error("Failed to post doubt:", error);
     showFormError("Failed to post doubt.");
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+    }
   }
 });
 
