@@ -1,5 +1,5 @@
 // doubts-board module
-const API_URL = "http://localhost:3000/doubts";
+const API_URL = "https://fresher-hub-api-cloudus.onrender.com/doubts";
 
 const doubtForm = document.getElementById("doubt-form");
 const doubtInput = document.getElementById("doubt-input");
