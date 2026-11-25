@@ -1,6 +1,17 @@
 {
   "notices": [],
-  "team": [],
+  "team": [ {
+       "name": "Pragna Vaghasiya",
+      "track": "Node",
+      "skills": ["HTML", "CSS", "JavaScript"],
+      "image": ""
+    },{
+       "name": "Ravi Patel",
+    "track": "Java",
+    "skills": ["Java", "Spring Boot", "SQL"],
+    "image": "https://i.pravatar.cc/150?img=12"
+    }
+  ],
   "leaves": [
     {
       "name": "Pratham Vyas",
