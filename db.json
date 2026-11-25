@@ -80,7 +80,7 @@
       "date": "2026-11-24",
       "name": "Nij",
       "description": "daily-update page",
-      "blocked": "none",
+      "blocked": "nothing",
       "id": 1
     },
     {
@@ -94,7 +94,7 @@
       "date": "2026-11-23",
       "name": "krunal",
       "description": "done his tasks",
-      "blocked": "none",
+      "blocked": "nothing",
       "id": 3
     }
   ],

@@ -17,19 +17,21 @@
         .thin-scroll::-webkit-scrollbar-thumb { background: #c7d2fe; border-radius: 10px; }
         .thin-scroll::-webkit-scrollbar-thumb:hover { background: #818cf8; }
 
-        :root { --daily-header: 60px; --daily-footer: 52px; }
-        .daily-header { height: var(--daily-header); }
+        /* --daily-header must match the real navbar height from header.html (py-4 + 40px logo + border) */
+        :root { --daily-header: 73px; --daily-footer: 52px; }
 
         /* Kill any shared top spacing coming from styles.css / theme.css */
         html, body.daily-shell { margin: 0 !important; padding: 0 !important; }
-        .daily-header { margin: 0 !important; padding-top: 0 !important; }
 
-        /* Mobile/tablet: footer sits at the bottom of the page, even on short content */
-        .daily-main { flex: 1 0 auto; }
-
-        /* Desktop (1024px+): header on top, footer pinned to the bottom of the screen,
-           panels fill exactly the space between. Plain CSS so it does not depend
-           on which Tailwind classes were built. */
+        @media (max-width: 767px) {
+            #mainNavigation { width: 100%; flex-direction: column; gap: 8px; }
+            #mainNavigation:not(.nav-open) { display: none !important; }
+            #mainNavigation.nav-open { display: flex !important; }
+        }
+        @media (min-width: 768px) {
+            #menuButton { display: none !important; }
+            #mainNavigation { display: flex !important; width: auto; flex-direction: row; align-items: center; gap: 4px; }
+        }
         @media (min-width: 1024px) {
             html, body.daily-shell { height: 100%; }
             body.daily-shell { display: block; min-height: 0; overflow: hidden; }
@@ -57,19 +59,12 @@
     </style>
 </head>
 
-<!--
-  Desktop (lg+): app-shell layout. The page itself never scrolls;
-  each panel fits the screen and scrolls internally if needed.
-  Mobile/tablet: normal page scroll.
--->
 <body class="daily-shell m-0 flex min-h-dvh flex-col bg-slate-50 p-0 font-sans text-slate-800 antialiased">
 
-    <div id="header-bar"></div>
+    <div id="header-bar" class="sticky top-0 z-50"></div>
 
-    <!-- Main -->
     <main class="daily-main mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 p-3 sm:p-5">
 
-        <!-- Form Panel -->
         <section class="flex min-h-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
             <div class="shrink-0 border-b border-slate-100 bg-indigo-50/60 px-6 py-4">
@@ -103,7 +98,6 @@
                         </div>
                     </div>
 
-                    <!-- Grows to fill free space, shrinks (and the area scrolls) when short -->
                     <div class="daily-desc">
                         <label for="description" class="mb-1.5 block text-sm font-semibold text-slate-700">What I did today</label>
                         <textarea id="description" required
@@ -171,7 +165,30 @@
             <p class="text-xs text-slate-500">Cloudus Infotech fresher batch .</p>
         </div>
     </footer>
+    <script>document.addEventListener("click", function (e) {
+        var button = e.target.closest("#menuButton");
 
+        if (button) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var scope = button.closest("header") || document;
+            var nav = scope.querySelector("#mainNavigation");
+            if (!nav) return;
+
+            nav.style.removeProperty("display");               // clear any leftover inline display
+            var isOpen = nav.classList.toggle("nav-open");
+            button.setAttribute("aria-expanded", String(isOpen));
+            return;
+        }
+
+        // Close the menu after tapping a link on mobile
+        if (window.innerWidth < 768 && e.target.closest("#mainNavigation a")) {
+            var openNav = document.getElementById("mainNavigation");
+            if (openNav) openNav.classList.remove("nav-open");
+        }
+    }, true);
+    </script>
     <script src="daily.js"></script>
 </body>
 
