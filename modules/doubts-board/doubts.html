@@ -30,6 +30,7 @@
     style="background-color: var(--bg); color: var(--text)"
   >
     <!-- <a href="../../index.html">&larr; Home</a> -->
+    <div id="header-bar"></div>
 
     <main id="app" class="w-full px-4 md:px-36 py-6 space-y-6">
       <header>
@@ -125,5 +126,46 @@
     </main>
 
     <script src="doubts.js"></script>
+    <script>
+      fetch("../../header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          const headerBar = document.getElementById("header-bar");
+          headerBar.innerHTML = data;
+
+          // Fix relative links because doubts.html is inside modules/doubts-board/
+          headerBar.querySelectorAll("a[href]").forEach((link) => {
+            const href = link.getAttribute("href");
+            if (!href.startsWith("http") && !href.startsWith("#")) {
+              link.setAttribute("href", "../../" + href);
+            }
+          });
+
+          // Attach mobile menu toggle AFTER header HTML is injected
+          const menuButton = document.getElementById("menuButton");
+          const mainNavigation = document.getElementById("mainNavigation");
+
+          if (menuButton && mainNavigation) {
+            menuButton.addEventListener("click", () => {
+              const isExpanded =
+                menuButton.getAttribute("aria-expanded") === "true";
+              menuButton.setAttribute("aria-expanded", String(!isExpanded));
+              mainNavigation.classList.toggle("hidden");
+              mainNavigation.classList.toggle("flex");
+            });
+
+            mainNavigation.querySelectorAll("a").forEach((link) => {
+              link.addEventListener("click", () => {
+                if (window.innerWidth < 768) {
+                  mainNavigation.classList.add("hidden");
+                  mainNavigation.classList.remove("flex");
+                  menuButton.setAttribute("aria-expanded", "false");
+                }
+              });
+            });
+          }
+        })
+        .catch((err) => console.error("Failed to load header:", err));
+    </script>
   </body>
 </html>
