@@ -75,7 +75,7 @@ async function getUpdates() {
     }
 }
 
-// Delete daily update
+// function for Delete daily update by its id
 async function deleteUpdate(id) {
 
     const confirmDelete = confirm("Are you sure you want to delete this update?");
@@ -108,7 +108,7 @@ function displayUpdates(data) {
 
     updatesList.innerHTML = "";
 
-    // Empty state (uses the static #emptyState block in the HTML)
+    // Empty state
     if (!data || data.length === 0) {
         setSummary(0);
         return;
@@ -409,6 +409,36 @@ form.addEventListener("submit", async (e) => {
         subBtn.textContent = "Submit Daily Update →";
     }
 });
+
+fetch('../../footer.html')
+    .then((response) => {
+
+    if (!response.ok) {
+        throw new Error("Footer not found");
+    }
+
+    return response.text();
+
+    })
+    .then((data) => {
+
+    const footerContainer =
+        document.getElementById('footer-container');
+
+    footerContainer.innerHTML = data;
+
+    // Dynamic Current Year
+    const currentYear =
+        footerContainer.querySelector("#currentYear");
+
+    if (currentYear) {
+        currentYear.textContent = new Date().getFullYear();
+        }
+
+    })
+    .catch((error) => {
+        console.error("Footer Error:", error);
+    });
 
 // Load updates when page opens
 getUpdates();
