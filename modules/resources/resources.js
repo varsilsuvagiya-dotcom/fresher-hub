@@ -1,4 +1,3 @@
-
 const API_URL = "https://fresher-hub-api-cloudus.onrender.com/resources";
 
 const resourceContainer = document.getElementById("resourceContainer");
@@ -7,6 +6,13 @@ const searchInput = document.getElementById("searchInput");
 
 let resources = [];
 
+// Load shared header
+fetch("../../header.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.getElementById("header").innerHTML = data;
+  })
+  .catch((error) => console.error("Header error:", error));
 
 // ================================
 // LOAD SHARED HEADER
@@ -31,8 +37,7 @@ async function loadHeader() {
 
     if (menuButton && mainNavigation) {
       menuButton.addEventListener("click", () => {
-        const expanded =
-          menuButton.getAttribute("aria-expanded") === "true";
+        const expanded = menuButton.getAttribute("aria-expanded") === "true";
 
         menuButton.setAttribute("aria-expanded", String(!expanded));
 
@@ -40,7 +45,7 @@ async function loadHeader() {
         mainNavigation.classList.toggle("flex");
       });
 
-      mainNavigation.querySelectorAll("a").forEach(link => {
+      mainNavigation.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => {
           if (window.innerWidth < 768) {
             mainNavigation.classList.add("hidden");
@@ -52,15 +57,13 @@ async function loadHeader() {
     }
 
     // Fix nested module navigation paths
-    headerContainer.querySelectorAll('a[href^="modules/"]').forEach(link => {
+    headerContainer.querySelectorAll('a[href^="modules/"]').forEach((link) => {
       link.href = "../../" + link.getAttribute("href");
     });
-
   } catch (error) {
     console.error("Header Error:", error);
   }
 }
-
 
 // ================================
 // LOAD SHARED FOOTER
@@ -85,7 +88,7 @@ async function loadFooter() {
     footerContainer.innerHTML = html;
 
     // Fix all footer relative links
-    footerContainer.querySelectorAll("a").forEach(link => {
+    footerContainer.querySelectorAll("a").forEach((link) => {
       const href = link.getAttribute("href");
 
       if (href && href.startsWith("./")) {
@@ -99,12 +102,10 @@ async function loadFooter() {
     if (currentYear) {
       currentYear.textContent = new Date().getFullYear();
     }
-
   } catch (error) {
     console.error("Footer Error:", error);
   }
 }
-
 
 // ================================
 // FETCH RESOURCES
@@ -127,7 +128,6 @@ async function fetchResources() {
     resources = await response.json();
 
     displayResources(resources);
-
   } catch (error) {
     console.error("Fetch Error:", error);
 
@@ -138,7 +138,6 @@ async function fetchResources() {
     `;
   }
 }
-
 
 // ================================
 // DISPLAY RESOURCES
@@ -156,11 +155,10 @@ function displayResources(data) {
     return;
   }
 
-  data.forEach(resource => {
+  data.forEach((resource) => {
     const card = document.createElement("div");
 
-    card.className =
-      "bg-white p-5 rounded-xl shadow-sm border border-gray-200";
+    card.className = "bg-white p-5 rounded-xl shadow-sm border border-gray-200";
 
     const topic = document.createElement("p");
     topic.className = "text-sm font-semibold text-indigo-600 mb-2";
@@ -172,8 +170,7 @@ function displayResources(data) {
 
     const description = document.createElement("p");
     description.className = "text-gray-600 text-sm mb-4";
-    description.textContent =
-      resource.description || "No description available.";
+    description.textContent = resource.description || "No description available.";
 
     const link = document.createElement("a");
     link.href = resource.url;
@@ -185,31 +182,23 @@ function displayResources(data) {
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.textContent = "Delete";
-    deleteButton.className =
-      "ml-4 text-red-600 text-sm font-semibold";
+    deleteButton.className = "ml-4 text-red-600 text-sm font-semibold";
 
     deleteButton.addEventListener("click", () => {
       deleteResource(resource.id);
     });
 
-    card.append(
-      topic,
-      title,
-      description,
-      link,
-      deleteButton
-    );
+    card.append(topic, title, description, link, deleteButton);
 
     resourceContainer.appendChild(card);
   });
 }
 
-
 // ================================
 // ADD NEW RESOURCE
 // ================================
 
-resourceForm.addEventListener("submit", async event => {
+resourceForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const newResource = {
@@ -217,16 +206,16 @@ resourceForm.addEventListener("submit", async event => {
     title: document.getElementById("title").value.trim(),
     url: document.getElementById("url").value.trim(),
     description: document.getElementById("description").value.trim(),
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
   };
 
   try {
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newResource)
+      body: JSON.stringify(newResource),
     });
 
     if (!response.ok) {
@@ -236,28 +225,24 @@ resourceForm.addEventListener("submit", async event => {
     resourceForm.reset();
 
     await fetchResources();
-
   } catch (error) {
     console.error("Add Resource Error:", error);
     alert("Unable to add resource.");
   }
 });
 
-
 // ================================
 // DELETE RESOURCE
 // ================================
 
 async function deleteResource(id) {
-  const confirmDelete = confirm(
-    "Are you sure you want to delete this resource?"
-  );
+  const confirmDelete = confirm("Are you sure you want to delete this resource?");
 
   if (!confirmDelete) return;
 
   try {
     const response = await fetch(`${API_URL}/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
     });
 
     if (!response.ok) {
@@ -265,13 +250,11 @@ async function deleteResource(id) {
     }
 
     await fetchResources();
-
   } catch (error) {
     console.error("Delete Error:", error);
     alert("Unable to delete resource.");
   }
 }
-
 
 // ================================
 // SEARCH RESOURCES
@@ -280,21 +263,16 @@ async function deleteResource(id) {
 searchInput.addEventListener("input", () => {
   const searchValue = searchInput.value.trim().toLowerCase();
 
-  const filteredResources = resources.filter(resource => {
+  const filteredResources = resources.filter((resource) => {
     const title = (resource.title || "").toLowerCase();
     const topic = (resource.topic || "").toLowerCase();
     const description = (resource.description || "").toLowerCase();
 
-    return (
-      title.includes(searchValue) ||
-      topic.includes(searchValue) ||
-      description.includes(searchValue)
-    );
+    return title.includes(searchValue) || topic.includes(searchValue) || description.includes(searchValue);
   });
 
   displayResources(filteredResources);
 });
-
 
 // ================================
 // INITIALIZE MODULE

@@ -1,4 +1,24 @@
-:root { --primary: #4f46e5; --bg: #f8fafc; --text: #0f172a; }
-body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 1rem; }
-nav { display: flex; flex-wrap: wrap; gap: .5rem; }
-
+:root {
+  --primary: #4f46e5;
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --text-secondary: #64748b;
+}
+/* Connect CSS variables with Tailwind */
+@theme inline {
+  --color-primary: var(--primary);
+  --color-background: var(--bg);
+  --color-heading: var(--text);
+  --color-secondary: var(--text-secondary);
+}
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 1rem;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
