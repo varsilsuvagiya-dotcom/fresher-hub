@@ -1,6 +1,7 @@
 // resources module
 
-const API_URL = "http://localhost:3000/resources";
+const API_URL = "https://fresher-hub-api-cloudus.onrender.com/resources";
+// const API_URL = "http://localhost:3000/resources";
 
 const resourceContainer = document.getElementById("resourceContainer");
 const resourceForm = document.getElementById("resourceForm");
@@ -10,11 +11,11 @@ let resources = [];
 
 // Load shared header
 fetch("../../header.html")
-  .then(response => response.text())
-  .then(data => {
+  .then((response) => response.text())
+  .then((data) => {
     document.getElementById("header").innerHTML = data;
   })
-  .catch(error => console.error("Header error:", error));
+  .catch((error) => console.error("Header error:", error));
 
 // Fetch resources from JSON Server
 async function fetchResources() {
@@ -27,7 +28,6 @@ async function fetchResources() {
 
     resources = await response.json();
     displayResources(resources);
-
   } catch (error) {
     console.error(error);
     resourceContainer.textContent = "Unable to load resources. Start JSON Server first.";
@@ -39,18 +39,16 @@ function displayResources(data) {
   resourceContainer.innerHTML = "";
 
   if (data.length === 0) {
-    resourceContainer.innerHTML =
-      `<p class="col-span-full text-center text-gray-500 py-8">
+    resourceContainer.innerHTML = `<p class="col-span-full text-center text-gray-500 py-8">
         No resources found.
       </p>`;
     return;
   }
 
-  data.forEach(resource => {
+  data.forEach((resource) => {
     const card = document.createElement("div");
 
-    card.className =
-      "bg-white p-5 rounded-xl shadow-sm border border-gray-200";
+    card.className = "bg-white p-5 rounded-xl shadow-sm border border-gray-200";
 
     const topic = document.createElement("p");
     topic.className = "text-sm font-semibold text-indigo-600 mb-2";
@@ -73,8 +71,7 @@ function displayResources(data) {
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
-    deleteButton.className =
-      "ml-4 text-red-600 text-sm font-semibold";
+    deleteButton.className = "ml-4 text-red-600 text-sm font-semibold";
 
     deleteButton.addEventListener("click", () => {
       deleteResource(resource.id);
@@ -86,7 +83,7 @@ function displayResources(data) {
 }
 
 // Add new resource
-resourceForm.addEventListener("submit", async event => {
+resourceForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const newResource = {
@@ -94,16 +91,16 @@ resourceForm.addEventListener("submit", async event => {
     title: document.getElementById("title").value.trim(),
     url: document.getElementById("url").value.trim(),
     description: document.getElementById("description").value.trim(),
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
   };
 
   try {
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newResource)
+      body: JSON.stringify(newResource),
     });
 
     if (!response.ok) {
@@ -112,7 +109,6 @@ resourceForm.addEventListener("submit", async event => {
 
     resourceForm.reset();
     fetchResources();
-
   } catch (error) {
     console.error(error);
     alert("Unable to add resource.");
@@ -127,7 +123,7 @@ async function deleteResource(id) {
 
   try {
     const response = await fetch(`${API_URL}/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
     });
 
     if (!response.ok) {
@@ -135,7 +131,6 @@ async function deleteResource(id) {
     }
 
     fetchResources();
-
   } catch (error) {
     console.error(error);
     alert("Unable to delete resource.");
@@ -146,11 +141,7 @@ async function deleteResource(id) {
 searchInput.addEventListener("input", () => {
   const searchValue = searchInput.value.toLowerCase();
 
-  const filteredResources = resources.filter(resource =>
-    resource.title.toLowerCase().includes(searchValue) ||
-    resource.topic.toLowerCase().includes(searchValue) ||
-    (resource.description || "").toLowerCase().includes(searchValue)
-  );
+  const filteredResources = resources.filter((resource) => resource.title.toLowerCase().includes(searchValue) || resource.topic.toLowerCase().includes(searchValue) || (resource.description || "").toLowerCase().includes(searchValue));
 
   displayResources(filteredResources);
 });

@@ -1,6 +1,51 @@
 {
   "notices": [],
-  "team": [],
+  "team": [
+    {
+      "name": "Ravi Patel",
+      "track": "Java Developer",
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "SQL"
+      ],
+      "image": "https://i.pravatar.cc/150?img=12",
+      "id": "BR5vU60XSus"
+    },
+    {
+      "name": "Ravi Patel",
+      "track": "Java Developer",
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "SQL"
+      ],
+      "image": "https://i.pravatar.cc/150?img=12",
+      "id": "YySE82U_sjY"
+    },
+    {
+      "name": "Ravi Patel",
+      "track": "Java Developer",
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "SQL"
+      ],
+      "image": "https://i.pravatar.cc/150?img=12",
+      "id": "BOyRZjF29Hs"
+    },
+    {
+      "name": "Ravi Patel",
+      "track": "Java Developer",
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "SQL"
+      ],
+      "image": "https://i.pravatar.cc/150?img=12",
+      "id": "KqY4ZwQ_55g"
+    }
+  ],
   "leaves": [],
   "updates": [
     {
@@ -8,24 +53,25 @@
       "name": "Nij",
       "description": "daily-update page",
       "blocked": "none",
-      "id": 1
+      "id": "1"
     },
     {
       "date": "2026-11-24",
       "name": "Jil",
       "description": "Completed cad design",
       "blocked": "when creating a layout for machine",
-      "id": 2
+      "id": "2"
     },
     {
       "date": "2026-11-23",
       "name": "krunal",
       "description": "done his tasks",
       "blocked": "none",
-      "id": 3
+      "id": "3"
     }
   ],
   "doubts": [],
   "events": [],
-  "resources": []
+  "resources": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
