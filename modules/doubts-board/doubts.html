@@ -26,13 +26,13 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body
-    class="bg-bg text-text min-h-screen"
+    class="bg-bg text-text min-h-screen flex flex-col"
     style="background-color: var(--bg); color: var(--text)"
   >
     <!-- <a href="../../index.html">&larr; Home</a> -->
     <div id="header-bar"></div>
 
-    <main id="app" class="w-full px-4 md:px-36 py-6 space-y-6">
+    <main id="app" class="w-full flex-1 px-4 md:px-36 py-6 space-y-6">
       <header>
         <h1 class="text-2xl md:text-3xl font-bold text-primary mt-2">
           Doubts Board
@@ -125,6 +125,9 @@
       ></section>
     </main>
 
+    <!-- FOOTER -->
+    <div id="footer-container"></div>
+
     <script src="doubts.js"></script>
     <script>
       fetch("../../header.html")
@@ -166,6 +169,35 @@
           }
         })
         .catch((err) => console.error("Failed to load header:", err));
+
+      // LOAD COMMON FOOTER
+      fetch("../../footer.html")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Footer not found");
+          }
+          return response.text();
+        })
+        .then((data) => {
+          const footerContainer = document.getElementById("footer-container");
+          footerContainer.innerHTML = data;
+
+          // Fix relative links because doubts.html is inside modules/doubts-board/
+          footerContainer.querySelectorAll("a[href]").forEach((link) => {
+            const href = link.getAttribute("href");
+            if (!href.startsWith("http") && !href.startsWith("#")) {
+              link.setAttribute("href", "../../" + href);
+            }
+          });
+
+          const currentYear = footerContainer.querySelector("#currentYear");
+          if (currentYear) {
+            currentYear.textContent = new Date().getFullYear();
+          }
+        })
+        .catch((error) => {
+          console.error("Footer Error:", error);
+        });
     </script>
   </body>
 </html>
