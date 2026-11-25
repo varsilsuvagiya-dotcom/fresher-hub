@@ -9,18 +9,27 @@ const filterButtons = document.querySelectorAll(".filter-btn");
 
 let allDoubts = [];
 let currentFilter = "all";
+let errorMessage = "";
 
 async function fetchDoubts() {
   try {
     const response = await axios.get(API_URL);
     allDoubts = response.data;
+    errorMessage = "";
     renderDoubts();
   } catch (error) {
     console.error("Failed to fetch doubts:", error);
+    errorMessage = "Failed to load doubts.";
+    renderDoubts();
   }
 }
 
 function renderDoubts() {
+  if (errorMessage) {
+    doubtsList.innerHTML = `<p class="text-sm text-rose-600">${errorMessage}</p>`;
+    return;
+  }
+
   const filteredDoubts = [...allDoubts].reverse().filter((doubt) => {
     if (currentFilter === "open") return doubt.status === "open";
     if (currentFilter === "solved") return doubt.status === "solved";
@@ -99,10 +108,13 @@ doubtForm.addEventListener("submit", async (e) => {
   try {
     const response = await axios.post(API_URL, newDoubt);
     allDoubts.push(response.data);
+    errorMessage = "";
     doubtForm.reset();
     renderDoubts();
   } catch (error) {
     console.error("Failed to post doubt:", error);
+    errorMessage = "Failed to post doubt.";
+    renderDoubts();
   }
 });
 
@@ -110,6 +122,7 @@ doubtForm.addEventListener("submit", async (e) => {
 filterButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     currentFilter = btn.dataset.filter;
+    errorMessage = "";
 
     filterButtons.forEach((b) => {
       const isActive = b === btn;
@@ -135,9 +148,12 @@ doubtsList.addEventListener("click", async (e) => {
     allDoubts = allDoubts.map((doubt) =>
       String(doubt.id) === String(id) ? { ...doubt, status: "solved" } : doubt,
     );
+    errorMessage = "";
     renderDoubts();
   } catch (error) {
     console.error("Failed to mark doubt as solved:", error);
+    errorMessage = "Failed to update doubt status.";
+    renderDoubts();
   }
 });
 
