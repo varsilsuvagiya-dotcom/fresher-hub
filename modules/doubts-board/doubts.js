@@ -21,7 +21,7 @@ async function fetchDoubts() {
 }
 
 function renderDoubts() {
-  const filteredDoubts = allDoubts.filter((doubt) => {
+  const filteredDoubts = [...allDoubts].reverse().filter((doubt) => {
     if (currentFilter === "open") return doubt.status === "open";
     if (currentFilter === "solved") return doubt.status === "solved";
     return true;
@@ -98,7 +98,7 @@ doubtForm.addEventListener("submit", async (e) => {
 
   try {
     const response = await axios.post(API_URL, newDoubt);
-    allDoubts.unshift(response.data);
+    allDoubts.push(response.data);
     doubtForm.reset();
     renderDoubts();
   } catch (error) {
