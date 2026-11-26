@@ -101,7 +101,7 @@ function displayTeamMembers(teams) {
       <button
       onclick="deleteMember(${Number(member.id)})"
       class="absolute top-1 right-2 text-sm rounded-lg border border-red-200
-                bg-red-50 px-2 py-1 font-semibold  text-red-600"
+                bg-red-50 px-2 py-1 font-semibold text-red-600"
     >
       <span>✖</span>
     </button>

@@ -1,41 +1,6 @@
 @import "tailwindcss";
 
-/* Professional scrollbar for update history */
-
-/* @import "tailwindcss";
-/* Import common theme */
+/* Shared team theme (colours, fh- components, page shell) */
 @import "../shared/theme.css";
 
-@source "../";
-
-/* Prevent whole page scrolling on desktop */
-@media (min-width: 1024px) {
-  html,
-  body {
-    height: 100%;
-    /* overflow: hidden; */
-  }
-}
-
-/* Data panel scrollbar */
-#updatesList {
-  scrollbar-width: thin;
-  scrollbar-color: #283a50 #f8fafc;
-}
-
-#updatesList::-webkit-scrollbar {
-  width: 7px;
-}
-
-#updatesList::-webkit-scrollbar-track {
-  background: #f8fafc;
-}
-
-#updatesList::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 10px;
-}
-
-#updatesList::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
+@source "./";
