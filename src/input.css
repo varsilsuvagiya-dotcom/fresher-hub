@@ -13,14 +13,14 @@
   html,
   body {
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 }
 
 /* Data panel scrollbar */
 #updatesList {
   scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 #f8fafc;
+  scrollbar-color: #283a50 #f8fafc;
 }
 
 #updatesList::-webkit-scrollbar {
