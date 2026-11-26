@@ -139,4 +139,3 @@ if (month_filter) {
 
 fetch_notices();
 
-
