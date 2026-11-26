@@ -12,6 +12,53 @@
 
   <link rel="stylesheet" href="../../shared/theme.css">
   <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+        .thin-scroll { scrollbar-width: thin; scrollbar-color: #c7d2fe transparent; }
+        .thin-scroll::-webkit-scrollbar { width: 6px; }
+        .thin-scroll::-webkit-scrollbar-thumb { background: #c7d2fe; border-radius: 10px; }
+        .thin-scroll::-webkit-scrollbar-thumb:hover { background: #818cf8; }
+
+        /* --daily-header must match the real navbar height from header.html (py-4 + 40px logo + border) */
+        :root { --daily-header: 73px; --daily-footer: 52px; }
+
+        /* Kill any shared top spacing coming from styles.css / theme.css */
+        html, body.daily-shell { margin: 0 !important; padding: 0 !important; }
+
+        @media (max-width: 767px) {
+            #mainNavigation { width: 100%; flex-direction: column; gap: 8px; }
+            #mainNavigation:not(.nav-open) { display: none !important; }
+            #mainNavigation.nav-open { display: flex !important; }
+        }
+        @media (min-width: 768px) {
+            #menuButton { display: none !important; }
+            #mainNavigation { display: flex !important; width: auto; flex-direction: row; align-items: center; gap: 4px; }
+        }
+        @media (min-width: 1024px) {
+            html, body.daily-shell { height: 100%; }
+            body.daily-shell { display: block; min-height: 0; overflow: hidden; }
+
+            .daily-main {
+                flex: none;
+                height: calc(100vh - var(--daily-header) - var(--daily-footer));
+                height: calc(100dvh - var(--daily-header) - var(--daily-footer));
+                grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+                grid-template-rows: minmax(0, 1fr);
+                gap: 20px; padding: 20px;
+            }
+            .daily-main > section { height: 100%; min-height: 0; }
+            .daily-fields { flex: 1 1 0; min-height: 0; overflow-y: auto; }
+            .daily-desc { display: flex; flex: 1 1 0; flex-direction: column; min-height: 150px; }
+            .daily-desc textarea { flex: 1 1 0; height: auto; min-height: 96px; }
+
+            .daily-footer {
+                position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+                height: var(--daily-footer); margin: 0;
+                display: flex; align-items: center;
+            }
+            .daily-footer > div { padding-top: 0; padding-bottom: 0; }
+        }
+    </style>
 </head>
 
 <body class="min-h-screen bg-slate-50 text-slate-800">
@@ -152,6 +199,31 @@
 
     </div>
   </div>
+
+  <script>document.addEventListener("click", function (e) {
+        var button = e.target.closest("#menuButton");
+
+        if (button) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var scope = button.closest("header") || document;
+            var nav = scope.querySelector("#mainNavigation");
+            if (!nav) return;
+
+            nav.style.removeProperty("display");               // clear any leftover inline display
+            var isOpen = nav.classList.toggle("nav-open");
+            button.setAttribute("aria-expanded", String(isOpen));
+            return;
+        }
+
+        // Close the menu after tapping a link on mobile
+        if (window.innerWidth < 768 && e.target.closest("#mainNavigation a")) {
+            var openNav = document.getElementById("mainNavigation");
+            if (openNav) openNav.classList.remove("nav-open");
+        }
+    }, true);
+    </script>
 
   <script src="leave.js"></script>
 
