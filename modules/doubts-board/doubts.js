@@ -74,7 +74,7 @@ function renderDoubts() {
       return `
         <article class="mb-3">
           <div
-            class="block bg-primaryLight hover:bg-primaryHover border border-primaryBorder rounded-lg p-4 transition"
+            class="block bg-primary-soft border border-slate-200 rounded-lg p-4 transition hover:-translate-y-0.5 hover:shadow-sm"
           >
             <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
               <div class="flex-1 min-w-0">
@@ -175,10 +175,11 @@ filterButtons.forEach((btn) => {
     filterButtons.forEach((b) => {
       const isActive = b === btn;
       b.classList.toggle("bg-primary", isActive);
+      b.classList.toggle("border-primary", isActive);
       b.classList.toggle("text-white", isActive);
       b.classList.toggle("bg-white", !isActive);
-      b.classList.toggle("text-text", !isActive);
-      b.style.backgroundColor = isActive ? "var(--primary)" : "";
+      b.classList.toggle("border-slate-300", !isActive);
+      b.classList.toggle("text-heading", !isActive);
     });
 
     renderDoubts();
