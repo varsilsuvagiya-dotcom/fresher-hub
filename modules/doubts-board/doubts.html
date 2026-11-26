@@ -40,10 +40,13 @@
       </header>
 
       <!-- Form Section -->
-      <section aria-label="Post a doubt">
+      <section
+        aria-label="Post a doubt"
+        class="bg-white/80 border border-slate-200 rounded-lg p-4 shadow-sm"
+      >
         <form
           id="doubt-form"
-          class="bg-white/80 border border-slate-200 rounded-lg p-4 shadow-sm flex flex-col md:flex-row md:items-end gap-3"
+          class="flex flex-col md:flex-row md:items-end gap-3"
         >
           <div class="w-full md:flex-1">
             <label for="doubt-input" class="block text-sm font-medium mb-1">
@@ -53,7 +56,6 @@
               type="text"
               id="doubt-input"
               placeholder="[What you expected, what happened, what you tried]"
-              required
               class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
@@ -85,6 +87,11 @@
             </button>
           </div>
         </form>
+
+        <p
+          id="formError"
+          class="text-sm text-red-600 font-medium mt-2 hidden"
+        ></p>
       </section>
 
       <!-- Filter Buttons -->
