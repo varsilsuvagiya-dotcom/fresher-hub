@@ -1,15 +1,15 @@
 {
   "notices": [],
-  "team": [ {
-       "name": "Pragna Vaghasiya",
-      "track": "Node",
-      "skills": ["HTML", "CSS", "JavaScript"],
-      "image": ""
-    },{
-       "name": "Ravi Patel",
-    "track": "Java",
-    "skills": ["Java", "Spring Boot", "SQL"],
-    "image": "https://i.pravatar.cc/150?img=12"
+  "team": [
+    {
+      "name": "aaa",
+      "track": "Laravel",
+      "skills": [
+        "JS",
+        "PYTHON"
+      ],
+      "image": "",
+      "id": "JxPQvoBbvBU"
     }
   ],
   "leaves": [
@@ -20,7 +20,7 @@
       "reason": "sick leave",
       "status": "pending",
       "created_at": "2026-11-24T05:42:03.650Z",
-      "id": 1
+      "id": "1"
     },
     {
       "name": "dev",
@@ -29,7 +29,7 @@
       "reason": "travelling",
       "status": "rejected",
       "created_at": "2026-11-24T06:17:50.359Z",
-      "id": 2
+      "id": "2"
     },
     {
       "name": "prath",
@@ -38,7 +38,7 @@
       "reason": "family function",
       "status": "accepted",
       "created_at": "2026-11-24T07:09:23.600Z",
-      "id": 3
+      "id": "3"
     },
     {
       "name": "p",
@@ -47,7 +47,7 @@
       "reason": "hospitalize ",
       "status": "pending",
       "created_at": "2026-11-24T08:45:44.769Z",
-      "id": 4
+      "id": "4"
     },
     {
       "name": "prr",
@@ -56,7 +56,7 @@
       "reason": "On trip",
       "status": "pending",
       "created_at": "2026-11-24T08:46:15.687Z",
-      "id": 5
+      "id": "5"
     },
     {
       "name": "vyas",
@@ -65,7 +65,7 @@
       "reason": "mini trip",
       "status": "pending",
       "created_at": "2026-11-24T08:46:43.049Z",
-      "id": 6
+      "id": "6"
     },
     {
       "name": "abc",
@@ -74,7 +74,7 @@
       "reason": "sick leave",
       "status": "pending",
       "created_at": "2026-11-24T08:47:30.181Z",
-      "id": 7
+      "id": "7"
     },
     {
       "name": "Pratham Vyas",
@@ -83,7 +83,7 @@
       "reason": "mini trip",
       "status": "rejected",
       "created_at": "2026-11-24T09:52:33.672Z",
-      "id": 8
+      "id": "8"
     }
   ],
   "updates": [
@@ -92,7 +92,7 @@
       "name": "Nij",
       "description": "daily-update page",
       "blocked": "nothing",
-      "id": 1
+      "id": "1"
     },
     {
       "date": "2026-11-24",
@@ -106,7 +106,7 @@
       "name": "krunal",
       "description": "done his tasks",
       "blocked": "nothing",
-      "id": 3
+      "id": "3"
     }
   ],
   "doubts": [],
