@@ -19,7 +19,6 @@ fetch('../../header.html')
         document.getElementById('header-bar').innerHTML = data;
     });
 
-// Set today's date by default
 // Today's date in the user's LOCAL timezone (YYYY-MM-DD)
 function getTodayLocal() {
     const now = new Date();
@@ -61,15 +60,9 @@ async function getUpdates() {
 
         updatesList.innerHTML = `
             <div class="flex min-h-[260px] flex-col items-center justify-center text-center">
-                <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-2xl">
-                    ⚠️
-                </div>
-                <h3 class="text-sm font-bold text-red-600">
-                    Unable to load updates
-                </h3>
-                <p class="mt-2 text-xs text-slate-400">
-                    Please check your server connection and try again.
-                </p>
+                <div class="mb-4 flex size-14 items-center justify-center rounded-2xl bg-danger-bg text-2xl">⚠️</div>
+                <h3 class="text-sm font-bold text-danger-text">Unable to load updates</h3>
+                <p class="mt-2 text-xs text-muted">Please check your server connection and try again.</p>
             </div>
         `;
     }
@@ -156,20 +149,20 @@ function displayUpdates(data) {
         // Date heading section
         const dateHeader = document.createElement("div");
 
-        dateHeader.className = "mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3";
+        dateHeader.className = "mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-line pb-3";
 
         const heading = document.createElement("h3");
 
-        heading.className = "flex items-center gap-2 text-sm font-bold text-slate-800";
+        heading.className = "flex items-center gap-2 text-sm font-bold text-body";
 
         heading.innerHTML = `
-            <span class="h-2.5 w-2.5 rounded-full bg-indigo-600"></span>
+            <span class="size-2.5 rounded-full bg-primary"></span>
             ${formattedDate}
         `;
 
         const count = document.createElement("span");
 
-        count.className = "rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-100";
+        count.className = "rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold text-primary-strong ring-1 ring-primary-tint ring-inset";
 
         count.textContent =
             `${groupedUpdates[date].length} ${groupedUpdates[date].length === 1 ? "Update" : "Updates"}`;
@@ -184,7 +177,7 @@ function displayUpdates(data) {
             // Main card
             const card = document.createElement("div");
 
-            card.className = "mb-3 rounded-xl border border-slate-200 bg-white p-4 transition hover:border-indigo-200 hover:shadow-sm";
+            card.className = "mb-3 rounded-xl border border-line bg-surface p-4 transition hover:border-primary-ring hover:shadow-sm";
 
             // Top section
             const topSection = document.createElement("div");
@@ -194,7 +187,7 @@ function displayUpdates(data) {
             // Profile
             const profile = document.createElement("div");
 
-            profile.className = "flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-bold uppercase text-indigo-700";
+            profile.className = "flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-tint text-sm font-bold text-primary-strong uppercase";
 
             profile.textContent = (item.name || "U").trim().charAt(0).toUpperCase();
 
@@ -205,13 +198,13 @@ function displayUpdates(data) {
 
             const name = document.createElement("h4");
 
-            name.className = "truncate text-sm font-bold text-slate-900";
+            name.className = "truncate text-sm font-bold text-heading";
 
             name.textContent = item.name || "Unknown User";
 
             const subtitle = document.createElement("p");
 
-            subtitle.className = "mt-0.5 text-xs text-slate-400";
+            subtitle.className = "mt-0.5 text-xs text-muted";
 
             subtitle.textContent = "Daily Activity Report";
 
@@ -220,7 +213,7 @@ function displayUpdates(data) {
             // Status
             const status = document.createElement("span");
 
-            status.className = "shrink-0 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-100";
+            status.className = "shrink-0 rounded-full bg-success-bg px-2.5 py-1 text-xs font-semibold text-success-text ring-1 ring-success-border ring-inset";
 
             status.textContent = "Submitted";
 
@@ -233,13 +226,13 @@ function displayUpdates(data) {
 
             const workLabel = document.createElement("h5");
 
-            workLabel.className = "mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500";
+            workLabel.className = "mb-2 flex items-center gap-2 text-xs font-bold tracking-wider text-secondary uppercase";
 
             workLabel.textContent = "✓ Work Completed";
 
             const work = document.createElement("p");
 
-            work.className = "whitespace-pre-wrap break-words text-sm leading-6 text-slate-600";
+            work.className = "text-sm leading-6 break-words whitespace-pre-wrap text-copy";
 
             work.textContent = item.description || "No work description provided.";
 
@@ -252,11 +245,11 @@ function displayUpdates(data) {
 
             const blocker = document.createElement("p");
 
-            blocker.className = "break-words text-sm leading-6";
+            blocker.className = "text-sm leading-6 break-words";
 
             const blockerLabel = document.createElement("h5");
 
-            blockerLabel.className = "mb-1 text-xs font-bold uppercase tracking-wider";
+            blockerLabel.className = "mb-1 text-xs font-bold tracking-wider uppercase";
 
             // Treat empty or "nothing" as no blocker
             const blockedText = (item.blocked || "").trim();
@@ -264,26 +257,26 @@ function displayUpdates(data) {
 
             if (hasBlocker) {
 
-                blockerSection.classList.add("border-amber-200", "bg-amber-50");
+                blockerSection.classList.add("border-warning-border", "bg-warning-bg");
 
-                blockerLabel.classList.add("text-amber-700");
+                blockerLabel.classList.add("text-warning-text");
+
+                blocker.classList.add("text-warning-strong");
 
                 blockerLabel.textContent = "⚠ Blocked On";
-
-                blocker.classList.add("text-amber-900");
 
                 blocker.textContent = blockedText;
 
             }
             else {
 
-                blockerSection.classList.add("border-emerald-100", "bg-emerald-50");
+                blockerSection.classList.add("border-success-border", "bg-success-bg");
 
-                blockerLabel.classList.add("text-emerald-700");
+                blockerLabel.classList.add("text-success-text");
+
+                blocker.classList.add("text-success-strong");
 
                 blockerLabel.textContent = "✓ Blockers";
-
-                blocker.classList.add("text-emerald-800");
 
                 blocker.textContent = "No blockers reported";
             }
@@ -295,13 +288,7 @@ function displayUpdates(data) {
 
             deleteBtn.type = "button";
 
-            deleteBtn.className = `
-                mt-4 flex items-center justify-center gap-2
-                rounded-lg border border-red-200
-                bg-red-50 px-4 py-2
-                text-sm font-semibold text-red-600
-                transition hover:bg-red-100
-            `;
+            deleteBtn.className = "mt-4 flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-danger-border bg-danger-bg px-4 py-2 text-sm font-semibold text-danger-text transition hover:bg-danger-bg-hover";
 
             deleteBtn.innerHTML = `
                 <span>🗑</span>
@@ -309,7 +296,7 @@ function displayUpdates(data) {
             `;
 
             deleteBtn.addEventListener("click", () => {
-            deleteUpdate(item.id);
+                deleteUpdate(item.id);
             });
 
             // Add all sections to card
@@ -324,19 +311,6 @@ function displayUpdates(data) {
 
 }
 
-// Shows a validation message
-function showFieldError(input, message) {
-    input.value = "";                 // clear the spaces so the placeholder shows
-    input.setCustomValidity(message);
-    input.reportValidity();
-    input.focus();
-}
-
-// Clear the custom massage
-[inpName, description].forEach((field) => {
-    field.addEventListener("input", () => field.setCustomValidity(""));
-});
-
 // Submit daily update
 form.addEventListener("submit", async (e) => {
 
@@ -344,16 +318,6 @@ form.addEventListener("submit", async (e) => {
 
     const name = inpName.value.trim();
     const work = description.value.trim();
-
-    if (!name) {
-        showFieldError(inpName, "Please enter your name.");
-        return;
-    }
-
-    if (!work) {
-        showFieldError(description, "Please describe what you did today.");
-        return;
-    }
 
     const newUpdate = {
         date: inpDate.value,
@@ -413,26 +377,24 @@ form.addEventListener("submit", async (e) => {
 fetch('../../footer.html')
     .then((response) => {
 
-    if (!response.ok) {
-        throw new Error("Footer not found");
-    }
+        if (!response.ok) {
+            throw new Error("Footer not found");
+        }
 
-    return response.text();
+        return response.text();
 
     })
     .then((data) => {
 
-    const footerContainer =
-        document.getElementById('footer-container');
+        const footerContainer = document.getElementById('footer-container');
 
-    footerContainer.innerHTML = data;
+        footerContainer.innerHTML = data;
 
-    // Dynamic Current Year
-    const currentYear =
-        footerContainer.querySelector("#currentYear");
+        // Dynamic Current Year
+        const currentYear = footerContainer.querySelector("#currentYear");
 
-    if (currentYear) {
-        currentYear.textContent = new Date().getFullYear();
+        if (currentYear) {
+            currentYear.textContent = new Date().getFullYear();
         }
 
     })
