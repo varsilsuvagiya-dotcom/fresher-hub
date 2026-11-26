@@ -1,4 +1,7 @@
-// notice-board module
+
+// Notice Board Module
+
+const form = document.querySelector("#notice-form");
 const title = document.querySelector("#title");
 const message = document.querySelector("#message");
 const post = document.querySelector("#notice-post");
@@ -10,53 +13,63 @@ let notices = [];
 
 const api_url = "https://fresher-hub-api-cloudus.onrender.com/notices";
 
-// header function
-fetch('../../header.html')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('header-bar').innerHTML = data;
-    });
-
-//footer function
-fetch('../../footer.html')
-    .then((response) => {
-
-    if (!response.ok) {
-        throw new Error("Footer not found");
-    }
-
-    return response.text();
-
-    })
-    .then((data) => {
-
-    const footerContainer =
-        document.getElementById('footer-container');
-
-    footerContainer.innerHTML = data;
-
-    // Dynamic Current Year
-    const currentYear =
-        footerContainer.querySelector("#currentYear");
-
-    if (currentYear) {
-        currentYear.textContent = new Date().getFullYear();
+// Header Function
+fetch("../../header.html")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Header not found");
         }
 
+        return response.text();
     })
-    .catch((error) => {
+    .then(data => {
+        document.querySelector("#header-bar").innerHTML = data;
+    })
+    .catch(error => {
+        console.error("Header Error:", error);
+    });
+
+
+// Footer Function
+fetch("../../footer.html")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Footer not found");
+        }
+
+        return response.text();
+    })
+    .then(data => {
+        const footerContainer = document.querySelector("#footer-container");
+
+        footerContainer.innerHTML = data;
+
+        const currentYear = footerContainer.querySelector("#currentYear");
+
+        if (currentYear) {
+            currentYear.textContent = new Date().getFullYear();
+        }
+    })
+    .catch(error => {
         console.error("Footer Error:", error);
     });
 
+
 function display_notices() {
+
     const selectedMonth = month_filter ? month_filter.value : "all";
+
     post_list.innerHTML = "";
 
     const filteredNotices = notices
         .slice()
-        .sort((a, b) => b.id - a.id)
+        .sort((a, b) => Number(b.id) - Number(a.id))
         .filter(element => {
-            if (selectedMonth === "all") return true;
+
+            if (selectedMonth === "all") {
+                return true;
+            }
+
             return element.date && element.date.includes(selectedMonth);
         });
 
@@ -68,41 +81,116 @@ function display_notices() {
     list_status.textContent = "";
 
     filteredNotices.forEach(element => {
+
         const li = document.createElement("li");
 
-        li.className = "bg-white rounded-2xl border border-slate-300 shadow-sm p-6 hover:border-indigo-400 transition";
+        li.className = "bg-surface rounded-xl border border-line shadow-sm p-5 sm:p-6 hover:border-primary-ring-strong transition";
 
-        li.innerHTML = `
-            <div class="flex items-start justify-between gap-4 mb-2">
-                <h3 class="text-base font-bold text-slate-900">${element.title}</h3>
-                <span class="text-xs font-medium text-slate-400 whitespace-nowrap">${element.date}</span>
-            </div>
-            <p class="text-sm text-slate-600 leading-relaxed">${element.message}</p>
-        `;
+        const header = document.createElement("div");
+
+        header.className = "flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3";
+
+        const heading = document.createElement("h3");
+
+        heading.className = "text-base font-bold text-heading";
+        heading.textContent = element.title;
+
+        const date = document.createElement("span");
+
+        date.className = "text-xs font-medium text-secondary whitespace-nowrap";
+        date.textContent = element.date;
+
+        const description = document.createElement("p");
+
+        description.className = "text-sm text-copy leading-relaxed whitespace-pre-wrap";
+        description.textContent = element.message;
+
+        header.appendChild(heading);
+        header.appendChild(date);
+
+        li.appendChild(header);
+        li.appendChild(description);
 
         post_list.appendChild(li);
     });
 }
 
+
+
 async function fetch_notices() {
+
     list_status.textContent = "Loading notices...";
 
     try {
+
         const response = await fetch(api_url);
+
+        if (!response.ok) {
+            throw new Error("Unable to fetch notices");
+        }
+
         const data = await response.json();
 
+        if (!Array.isArray(data)) {
+            throw new Error("Invalid notice data");
+        }
+
         notices = data;
+
         display_notices();
+
     } catch (error) {
-        list_status.textContent = "Failed to load notices.";
+
+        console.error("Fetch Error:", error);
+
+        list_status.textContent = "Failed to load notices. Please try again.";
     }
 }
 
+function validate_field(field) {
+
+    const value = field.value.trim();
+
+    if (value === "") {
+        field.setCustomValidity("This field is required.");
+        return false;
+    }
+
+    field.setCustomValidity("");
+
+    return true;
+}
+
+title.addEventListener("input", () => {
+    validate_field(title);
+});
+
+message.addEventListener("input", () => {
+    validate_field(message);
+});
+
+
 async function post_notice(e) {
+
     e.preventDefault();
 
-    if (!title.value.trim() || !message.value.trim()) return;
+    const isTitleValid = validate_field(title);
+    const isMessageValid = validate_field(message);
+
+    if (!isTitleValid) {
+        alert("Please enter a notice title.");
+        title.reportValidity();
+        return;
+    }
+
+    if (!isMessageValid) {
+        alert("Please enter a notice message.");
+        message.reportValidity();
+        return;
+    }
+
     const today = new Date();
+
     const newNotice = {
         title: title.value.trim(),
         message: message.value.trim(),
@@ -113,6 +201,7 @@ async function post_notice(e) {
     post.textContent = "Posting...";
 
     try {
+
         const response = await fetch(api_url, {
             method: "POST",
             headers: {
@@ -121,21 +210,37 @@ async function post_notice(e) {
             body: JSON.stringify(newNotice)
         });
 
-        if (response.ok) {
-            title.value = "";
-            message.value = "";
-            fetch_notices();
+        if (!response.ok) {
+            throw new Error("Unable to post notice");
         }
+
+        form.reset();
+
+        await fetch_notices();
+
+        alert("Notice posted successfully!");
+
+    } catch (error) {
+
+        console.error("Post Error:", error);
+
+        alert("Failed to post notice. Please try again.");
+
     } finally {
+
         post.disabled = false;
-        post.textContent = "Post notice";
+        post.textContent = "Post Notice";
     }
 }
 
-post.addEventListener("click", post_notice);
+
+
+form.addEventListener("submit", post_notice);
+
+
 if (month_filter) {
     month_filter.addEventListener("change", display_notices);
 }
 
-fetch_notices();
 
+fetch_notices();
