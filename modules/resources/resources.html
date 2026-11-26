@@ -4,175 +4,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Resources | Fresher Hub</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../shared/theme.css">
+    <!-- Common Tailwind Theme -->
+    <link rel="stylesheet" href="../../src/output.css">
 </head>
 
-<body class="m-0 min-h-screen bg-slate-50 text-slate-800">
+<body class="min-h-screen bg-background text-heading">
 
-    <div id="header"></div>
+    <!-- Common Header -->
+    <div id="header" class="sticky top-0 z-50"></div>
 
-    <main class="max-w-7xl mx-auto px-5 py-10">
+    <main class="w-full p-3">
 
-        <div class="mb-8">
-            <p class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">
-                Fresher Hub
-            </p>
+        <!-- LEFT + RIGHT LAYOUT -->
+        <div class="grid grid-cols-1 lg:grid-cols-[335px_minmax(0,1fr)] gap-2 items-stretch">
 
-            <h1 class="text-3xl font-bold mt-2">
-                Learning Resources
-            </h1>
+            <!-- LEFT SIDEBAR -->
+            <aside class="min-w-0 rounded-2xl border border-line bg-primary-soft p-3">
 
-            <p class="text-slate-500 mt-2">
-                Find and share useful learning resources with your team.
-            </p>
-        </div>
+                <!-- Heading -->
+                <div class="flex items-center gap-3 mb-5">
 
-        <!-- Search -->
-        <div class="mb-8">
-            <input
-                type="search"
-                id="searchInput"
-                placeholder="Search resources..."
-                autocomplete="off"
-                class="w-full bg-white border border-slate-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-        </div>
+                    <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-line bg-surface text-primary shadow-sm">
 
-        <!-- Add Resource -->
-        <section class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 mb-10">
+                        <svg width="32" height="32"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2.2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round">
 
-            <h2 class="text-xl font-bold mb-5">
-                Add New Resource
-            </h2>
+                            <path d="m12 3 9 5-9 5-9-5 9-5Z"/>
+                            <path d="m3 12 9 5 9-5"/>
+                            <path d="m3 16 9 5 9-5"/>
 
-            <form id="resourceForm" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        </svg>
 
-                <div>
-                    <label for="topic" class="block text-sm font-medium mb-2">
-                        Topic
-                    </label>
+                    </div>
 
-                    <select
-                        id="topic"
-                        required
-                        class="w-full border border-slate-300 rounded-lg px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    >
-                        <option value="">Select Topic</option>
-                        <option value="HTML and CSS">HTML and CSS</option>
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="Git">Git</option>
-                        <option value="Python">Python</option>
-                        <option value="React">React</option>
-                        <option value="Other">Other</option>
-                    </select>
+                    <div class="min-w-0">
+
+                        <h1 class="text-lg font-bold text-heading">
+                            Learning Resources
+                        </h1>
+
+                        <p class="mt-1 text-xs leading-relaxed text-secondary">
+                            Find and share useful learning resources with your team.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div>
-                    <label for="title" class="block text-sm font-medium mb-2">
-                        Resource Title
+
+                <!-- Search -->
+                <div class="mb-5">
+
+                    <label for="searchInput" class="sr-only">
+                        Search resources
                     </label>
 
                     <input
-                        type="text"
-                        id="title"
-                        placeholder="Enter resource title"
-                        required
-                        class="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search resources..."
+                        autocomplete="off"
+                        class="field-input w-full rounded-xl bg-surface"
                     >
+
                 </div>
 
-                <!-- Resource URL -->
-                <div>
-                    <label for="url" class="block text-sm font-medium mb-2">
-                        Resource URL
-                    </label>
 
-                    <input
-                        type="url"
-                        id="url"
-                        name="url"
-                        placeholder="https://example.com"
-                        pattern="https?://.+"
-                        title="Enter a valid URL starting with http:// or https://"
-                        autocomplete="url"
-                        inputmode="url"
-                        required
-                        class="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                <!-- Add New Resource -->
+                <section class="overflow-hidden rounded-xl border border-line bg-surface shadow-sm">
+
+                    <!-- Form Heading -->
+                    <div class="flex items-center gap-2 border-b border-line-soft bg-primary-soft px-4 py-3">
+
+                        <span class="text-2xl leading-none text-primary">+</span>
+
+                        <h2 class="text-base font-bold text-heading">
+                            Add New Resource
+                        </h2>
+
+                    </div>
+
+
+                    <!-- Form -->
+                    <form id="resourceForm" class="flex flex-col gap-3 p-3">
+
+                        <!-- Topic -->
+                        <div>
+
+                            <label for="topic" class="mb-1.5 block text-sm font-semibold text-label">
+                                Topic
+                            </label>
+
+                            <select
+                                id="topic"
+                                required
+                                class="field-input w-full rounded-lg bg-surface"
+                            >
+                                <option value="">Select Topic</option>
+                                <option value="HTML and CSS">HTML and CSS</option>
+                                <option value="JavaScript">JavaScript</option>
+                                <option value="Git">Git</option>
+                                <option value="Python">Python</option>
+                                <option value="React">React</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                        </div>
+
+
+                        <!-- Resource Title -->
+                        <div>
+
+                            <label for="title" class="mb-1.5 block text-sm font-semibold text-label">
+                                Resource Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="title"
+                                placeholder="Enter resource title"
+                                required
+                                class="field-input w-full rounded-lg"
+                            >
+
+                        </div>
+
+
+                        <!-- Resource URL -->
+                        <div>
+
+                            <label for="url" class="mb-1.5 block text-sm font-semibold text-label">
+                                Resource URL
+                            </label>
+
+                            <input
+                                type="url"
+                                id="url"
+                                name="url"
+                                placeholder="https://example.com"
+                                pattern="https?://.+"
+                                title="Enter a valid URL starting with http:// or https://"
+                                autocomplete="url"
+                                inputmode="url"
+                                required
+                                class="field-input w-full rounded-lg"
+                            >
+
+                            <p class="mt-2 text-xs text-secondary">
+                                Only HTTP and HTTPS links are allowed.
+                            </p>
+
+                        </div>
+
+
+                        <!-- Description -->
+                        <div>
+
+                            <label for="description" class="mb-1.5 block text-sm font-semibold text-label">
+                                Description
+                            </label>
+
+                            <input
+                                type="text"
+                                id="description"
+                                placeholder="Enter description"
+                                class="field-input w-full rounded-lg"
+                            >
+
+                        </div>
+
+
+                        <!-- Add Button -->
+                        <button
+                            type="submit"
+                            id="addResourceButton"
+                            class="btn-primary w-full"
+                        >
+                            + Add Resource
+                        </button>
+
+
+                        <!-- Form Message -->
+                        <p
+                            id="formMessage"
+                            role="status"
+                            aria-live="polite"
+                            class="mt-1 text-sm"
+                        ></p>
+
+                    </form>
+
+                </section>
+
+            </aside>
+
+
+            <!-- RIGHT SIDE: AVAILABLE RESOURCES -->
+            <section class="min-w-0 min-h-[calc(100vh-100px)] rounded-2xl border border-line bg-surface p-4 shadow-sm">
+
+                <!-- Heading -->
+                <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+
+                    <h2 class="flex items-center gap-2 text-xl font-bold text-heading">
+
+                        <svg width="27" height="27"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             class="text-primary"
+                             stroke-width="2.2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round">
+
+                            <path d="m12 3 9 5-9 5-9-5 9-5Z"/>
+                            <path d="m3 12 9 5 9-5"/>
+                            <path d="m3 16 9 5 9-5"/>
+
+                        </svg>
+
+                        Available Resources
+
+                    </h2>
+
+
+                    <!-- Resource Count -->
+                    <span
+                        id="resourceCount"
+                        class="rounded-full bg-primary-soft px-4 py-2 text-xs font-semibold text-primary"
                     >
+                        Loading...
+                    </span>
 
-                    <p class="text-xs text-slate-500 mt-2">
-                        Only HTTP and HTTPS links are allowed.
+                </div>
+
+
+                <!-- Resource Cards -->
+                <div
+                    id="resourceContainer"
+                    class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"
+                >
+
+                    <p class="col-span-full py-8 text-center text-secondary">
+                        Loading resources...
                     </p>
+
                 </div>
 
-                <div>
-                    <label for="description" class="block text-sm font-medium mb-2">
-                        Description
-                    </label>
+            </section>
 
-                    <input
-                        type="text"
-                        id="description"
-                        placeholder="Enter description"
-                        class="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    >
-                </div>
-
-                <div class="md:col-span-2">
-                    <button
-                        type="submit"
-                        id="addResourceButton"
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        + Add Resource
-                    </button>
-                </div>
-
-            </form>
-
-            <p
-                id="formMessage"
-                role="status"
-                aria-live="polite"
-                class="text-sm mt-4"
-            ></p>
-
-        </section>
-
-        <!-- Available Resources -->
-        <section>
-
-            <div class="flex justify-between items-center mb-5">
-
-                <h2 class="text-xl font-bold">
-                    Available Resources
-                </h2>
-
-                <span id="resourceCount" class="text-sm text-slate-500">
-                    Loading...
-                </span>
-
-            </div>
-
-            <div
-                id="resourceContainer"
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-                <p class="col-span-full text-center text-slate-500 py-8">
-                    Loading resources...
-                </p>
-            </div>
-
-        </section>
+        </div>
 
     </main>
 
-    <!-- Shared Footer -->
+
+    <!-- Common Footer -->
     <div id="footer-container"></div>
 
+
+    <!-- Existing JavaScript -->
     <script src="resources.js"></script>
 
 </body>
