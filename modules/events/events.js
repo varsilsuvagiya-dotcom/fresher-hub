@@ -63,3 +63,31 @@ eventForm.addEventListener("submit", async (e) => {
 
   const eventData = {};
 });
+
+//  <!-- <div id="app">
+//       <form id="eventForm">
+//         <h3>Add an event</h3>
+
+//         <div>
+//           <label for="eventName">Event name</label>
+//           <input type="text" placeholder="[Event name]" id="inpEvent" />
+//         </div>
+//         <div>
+//           <div>
+//             <label for="date">Date</label>
+//             <input type="date" id="inpDate" />
+//           </div>
+//           <div>
+//             <label for="time">Time</label>
+//             <input type="time" id="inpTime" />
+//           </div>
+//         </div>
+//         <div>
+//           <label for="place">Place</label>
+//           <input type="text" placeholder="[Room or online link]" id="inpText" />
+//         </div>
+//         <div>
+//           <button type="submit" id="subBtn">Add event</button>
+//         </div>
+//       </form>
+//     </div>
