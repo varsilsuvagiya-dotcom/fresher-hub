@@ -93,4 +93,3 @@ post.addEventListener("click", post_notice);
 
 fetch_notices();
 
-
