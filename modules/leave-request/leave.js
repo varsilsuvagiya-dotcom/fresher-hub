@@ -51,8 +51,6 @@ fetch('../../footer.html')
     });
 
 
-
-// Date validation
 from_date.addEventListener("change", () => {
 
     to_date.min = from_date.value;
@@ -93,6 +91,7 @@ leave_form.addEventListener("submit", async (e) => {
         leave_form.reset();
         to_date.min = "";
         await fetch_leave();
+        alert("Leave added successfully");
     }
 
 });
