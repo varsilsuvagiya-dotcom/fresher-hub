@@ -1,17 +1,23 @@
 
 const API_URL = "https://fresher-hub-api-cloudus.onrender.com/resources";
 
-let resources = [];
-let isSubmittingResource = false;
-
+// DOM elements
 let resourceContainer;
 let resourceForm;
 let searchInput;
 let resourceCount;
 let formMessage;
 let addResourceButton;
+let resources = [];
 
-// Validate URL
+// Prevent multiple submissions from the same page
+let isSubmittingResource = false;
+let isDeletingResource = false;
+
+
+// URL VALIDATION
+
+
 function getSafeResourceUrl(value) {
     if (typeof value !== "string" || !value.trim()) {
         return null;
@@ -37,7 +43,11 @@ function getSafeResourceUrl(value) {
     }
 }
 
-// Duplicate helpers
+
+
+// DUPLICATE RESOURCE HELPERS
+
+
 function normalizeText(value) {
     return String(value ?? "")
         .trim()
@@ -71,7 +81,11 @@ function getUniqueResources(data) {
     });
 }
 
-// Load header
+
+
+// LOAD SHARED HEADER
+
+
 async function loadHeader() {
     try {
         const response = await fetch("../../header.html");
@@ -90,14 +104,19 @@ async function loadHeader() {
         headerContainer.innerHTML = html;
 
         const menuButton = headerContainer.querySelector("#menuButton");
-        const mainNavigation = headerContainer.querySelector("#mainNavigation");
+        const mainNavigation =
+            headerContainer.querySelector("#mainNavigation");
 
         if (menuButton && mainNavigation) {
             menuButton.addEventListener("click", () => {
                 const expanded =
                     menuButton.getAttribute("aria-expanded") === "true";
 
-                menuButton.setAttribute("aria-expanded", String(!expanded));
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    String(!expanded)
+                );
+
                 mainNavigation.classList.toggle("hidden");
                 mainNavigation.classList.toggle("flex");
             });
@@ -107,12 +126,17 @@ async function loadHeader() {
                     if (window.innerWidth < 768) {
                         mainNavigation.classList.add("hidden");
                         mainNavigation.classList.remove("flex");
-                        menuButton.setAttribute("aria-expanded", "false");
+
+                        menuButton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
                     }
                 });
             });
         }
 
+        // Fix navigation paths on nested module pages
         headerContainer
             .querySelectorAll('a[href^="modules/"]')
             .forEach(link => {
@@ -124,7 +148,10 @@ async function loadHeader() {
     }
 }
 
-// Load footer
+
+// LOAD SHARED FOOTER
+
+
 async function loadFooter() {
     try {
         const response = await fetch("../../footer.html");
@@ -144,6 +171,7 @@ async function loadFooter() {
 
         footerContainer.innerHTML = html;
 
+        // Fix footer links on nested module pages
         footerContainer.querySelectorAll("a").forEach(link => {
             const href = link.getAttribute("href");
 
@@ -152,6 +180,7 @@ async function loadFooter() {
             }
         });
 
+        // Dynamic copyright year
         const currentYear =
             footerContainer.querySelector("#currentYear");
 
@@ -164,12 +193,32 @@ async function loadFooter() {
     }
 }
 
-// Fetch resources
+
+
+// FORM MESSAGE
+
+
+function showFormMessage(message, type = "error") {
+    if (!formMessage) return;
+
+    formMessage.textContent = message;
+
+    formMessage.className =
+        type === "success"
+            ? "text-sm mt-4 text-green-600"
+            : "text-sm mt-4 text-red-600";
+}
+
+
+
+// FETCH RESOURCES
+
+
 async function fetchResources() {
     if (!resourceContainer) return;
 
     resourceContainer.innerHTML = `
-        <p class="col-span-full text-center text-gray-500 py-8">
+        <p class="col-span-full text-center text-slate-500 py-8">
             Loading resources...
         </p>
     `;
@@ -188,6 +237,7 @@ async function fetchResources() {
         }
 
         resources = data;
+
         filterResources();
 
     } catch (error) {
@@ -205,7 +255,9 @@ async function fetchResources() {
     }
 }
 
-// Filter resources
+
+
+
 function filterResources() {
     if (!searchInput) return;
 
@@ -223,7 +275,10 @@ function filterResources() {
     displayResources(getUniqueResources(filteredResources));
 }
 
-// Display resources
+
+// DISPLAY RESOURCES
+
+
 function displayResources(data) {
     if (!resourceContainer) return;
 
@@ -231,14 +286,16 @@ function displayResources(data) {
 
     if (resourceCount) {
         resourceCount.textContent =
-            `Showing ${data.length} ${data.length === 1 ? "resource" : "resources"}`;
+            `Showing ${data.length} ${
+                data.length === 1 ? "resource" : "resources"
+            }`;
     }
 
     if (data.length === 0) {
         const emptyMessage = document.createElement("p");
 
         emptyMessage.className =
-            "col-span-full text-center text-gray-500 py-8";
+            "col-span-full text-center text-slate-500 py-8";
 
         emptyMessage.textContent = searchInput?.value.trim()
             ? "No matching resources found."
@@ -252,7 +309,7 @@ function displayResources(data) {
         const card = document.createElement("div");
 
         card.className =
-            "bg-white p-5 rounded-xl shadow-sm border border-gray-200";
+            "bg-white p-5 rounded-xl shadow-sm border border-slate-200";
 
         const topic = document.createElement("p");
         topic.className =
@@ -264,12 +321,13 @@ function displayResources(data) {
         title.textContent = resource.title || "Untitled Resource";
 
         const description = document.createElement("p");
-        description.className = "text-gray-600 text-sm mb-4";
+        description.className = "text-slate-600 text-sm mb-4";
         description.textContent =
             resource.description || "No description available.";
 
         card.append(topic, title, description);
 
+        // Safe resource link
         const safeUrl = getSafeResourceUrl(resource.url);
 
         if (safeUrl) {
@@ -283,16 +341,19 @@ function displayResources(data) {
                 "text-indigo-600 font-semibold hover:text-indigo-800";
 
             card.appendChild(link);
-
         } else {
             const invalidMessage = document.createElement("p");
 
-            invalidMessage.textContent = "Invalid or unsafe resource URL.";
-            invalidMessage.className = "text-red-600 text-sm font-medium";
+            invalidMessage.textContent =
+                "Invalid or unsafe resource URL.";
+
+            invalidMessage.className =
+                "text-red-600 text-sm font-medium";
 
             card.appendChild(invalidMessage);
         }
 
+        // Delete button
         const deleteButton = document.createElement("button");
 
         deleteButton.type = "button";
@@ -309,21 +370,14 @@ function displayResources(data) {
     });
 }
 
-// Show form message
-function showFormMessage(message, type = "error") {
-    if (!formMessage) return;
 
-    formMessage.textContent = message;
 
-    formMessage.className = type === "success"
-        ? "text-sm mt-4 text-green-600"
-        : "text-sm mt-4 text-red-600";
-}
+// ADD RESOURCE
 
-// Add resource
 async function addResource(event) {
     event.preventDefault();
 
+    // Stop rapid repeated submissions
     if (isSubmittingResource) return;
 
     const topic = document.getElementById("topic")?.value.trim() ?? "";
@@ -356,6 +410,7 @@ async function addResource(event) {
         createdAt: new Date().toISOString()
     };
 
+    // Lock immediately before any asynchronous request
     isSubmittingResource = true;
 
     if (addResourceButton) {
@@ -364,6 +419,7 @@ async function addResource(event) {
     }
 
     try {
+        // Check latest server data before adding
         const checkResponse = await fetch(API_URL);
 
         if (!checkResponse.ok) {
@@ -390,6 +446,7 @@ async function addResource(event) {
             return;
         }
 
+        // Add resource
         const response = await fetch(API_URL, {
             method: "POST",
             headers: {
@@ -428,16 +485,24 @@ async function addResource(event) {
     }
 }
 
-// Delete resource
+
+// ========================================
+// DELETE RESOURCE
+// ========================================
+
 async function deleteResource(resource) {
+    if (isDeletingResource) return;
+
     const resourceKey = getResourceKey(resource);
 
     const matchingResources = resourceKey
         ? resources.filter(item => getResourceKey(item) === resourceKey)
-        : resources.filter(item => String(item.id) === String(resource.id));
+        : resources.filter(
+            item => String(item.id) === String(resource.id)
+        );
 
     const recordsToDelete = matchingResources.filter(
-        item => item.id !== undefined
+        item => item.id !== undefined && item.id !== null
     );
 
     if (recordsToDelete.length === 0) {
@@ -450,6 +515,8 @@ async function deleteResource(resource) {
         : "Are you sure you want to delete this resource?";
 
     if (!confirm(message)) return;
+
+    isDeletingResource = true;
 
     try {
         for (const item of recordsToDelete) {
@@ -468,13 +535,22 @@ async function deleteResource(resource) {
     } catch (error) {
         console.error("Delete Error:", error);
 
-        alert("Unable to delete all copies. Please refresh and try again.");
+        alert(
+            "Unable to delete all copies. Please refresh and try again."
+        );
 
         await fetchResources();
+
+    } finally {
+        isDeletingResource = false;
     }
 }
 
-// Initialize module
+
+
+// INITIALIZE RESOURCES MODULE
+
+
 function initializeResourcesModule() {
     resourceContainer = document.getElementById("resourceContainer");
     resourceForm = document.getElementById("resourceForm");
@@ -514,14 +590,19 @@ function initializeResourcesModule() {
         });
     }
 
+    // Search
     searchInput.addEventListener("input", filterResources);
     searchInput.addEventListener("search", filterResources);
+
+    // Form submission
     resourceForm.addEventListener("submit", addResource);
 
+    // Load shared components and resources
     loadHeader();
     loadFooter();
     fetchResources();
 }
+
 
 if (document.readyState === "loading") {
     document.addEventListener(

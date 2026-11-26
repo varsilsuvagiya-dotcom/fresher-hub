@@ -1,16 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>team-directory</title>
-  <link rel="stylesheet" href="../../shared/theme.css">
-  <link rel="stylesheet" href="../../styles.css">
-</head>
-<body>
-  <a href="../../index.html">&larr; Home</a>
-  <h1>team-directory</h1>
-  <div id="app"></div>
-  <script src="team.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Team directory | Fresher Hu</title>
+    <!-- <link rel="stylesheet" href="../../shared/theme.css"> -->
+    <link rel="stylesheet" href="../../src/output.css" />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body class="min-h-screen bg-slate-50 flex flex-col">
+    <!-- Shared Header -->
+    <div id="header"></div>
+    <main class="w-full max-w-7xl p-5 mx-auto flex-1">
+      <section class="flex flex-col justify-between items-center sm:flex-row gap-4">
+        <h1 class="text-primary text-2xl sm:text-xl font-bold uppercase">Team directory</h1>
+        <div>
+          <button id="openModal" class="cursor-pointer mr-2 mb-2 sm:mb-0 bg-primary text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-primary/90">+ Add Team</button>
+          <input type="search" id="searchInput" placeholder="Search names..." class="w-full sm:w-80 rounded-lg border border-secondary bg-white px-4 py-2 text-heading placeholder:text-secondary focus:border-primary focus:outline-none" />
+        </div>
+      </section>
+      <section>
+        <!-- Cards -->
+        <div id="teamContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-5"></div>
+
+        <p id="message" class="text-center mt-8 text-secondary"></p>
+        <div id="pagination" class="flex justify-center items-center flex-wrap gap-2 mt-8"></div>
+      </section>
+    </main>
+    <!-- Shared Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Modal  -->
+    <div id="memberModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+      <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center mb-5">
+          <h2 class="text-xl font-bold text-gray-800">Add Team Member</h2>
+
+          <button id="closeModal" type="button" class="text-gray-500 hover:text-red-500 text-2xl" onclick="hideModal()">&times;</button>
+        </div>
+
+        <!-- Form -->
+        <form id="memberForm" class="space-y-4">
+          <div>
+            <label for="memberName" class="block text-sm font-medium mb-1"> Full Name <span class="text-red-500">*</span></label>
+
+            <input type="text" id="memberName" placeholder="Enter full name" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-primary" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1"> Track <span class="text-red-500">*</span></label>
+            <select id="memberTrack" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-primary" required>
+              <option value="">Select Track</option>
+              <option value="Node">Node</option>
+              <option value="Laravel">Laravel</option>
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
+              <option value="React">React</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1"> Skills <span class="text-red-500">*</span> </label>
+            <input type="text" id="memberSkills" placeholder="HTML, CSS, JavaScript" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-primary" />
+            <p class="text-xs text-gray-500 mt-1">Separate skills using commas.</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1"> Profile Image URL (Optional) </label>
+            <input type="url" id="memberImage" placeholder="https://example.com/image.jpg" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-primary" />
+          </div>
+          <!-- Buttons -->
+          <div class="flex gap-3 pt-3">
+            <button type="button" id="cancelModal" class="w-1/2 border border-gray-300 rounded-lg py-2 hover:bg-gray-100 cursor-pointer" onclick="hideModal()">Cancel</button>
+            <button type="submit" id="saveTeam" class="w-1/2 bg-primary text-white rounded-lg py-2 hover:bg-primary/90 cursor-pointer">Save Member</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="team.js"></script>
+  </body>
 </html>
