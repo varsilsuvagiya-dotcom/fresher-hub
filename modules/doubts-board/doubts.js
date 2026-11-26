@@ -7,9 +7,17 @@ const doubtTopic = document.getElementById("doubt-topic");
 const doubtsList = document.getElementById("doubts-list");
 const filterButtons = document.querySelectorAll(".filter-btn");
 
+const formError = document.getElementById("formError");
+
 let allDoubts = [];
 let currentFilter = "all";
 let errorMessage = "";
+
+// Clear the error as soon as the user starts typing
+doubtInput.addEventListener("input", () => {
+  formError.textContent = "";
+  formError.classList.add("hidden");
+});
 
 // helper clean
 function escapeHTML(str) {
@@ -108,7 +116,15 @@ doubtForm.addEventListener("submit", async (e) => {
 
   const text = doubtInput.value.trim();
   const topic = doubtTopic.value;
-  if (!text) return;
+  if (!text) {
+    formError.textContent = "Please enter your doubt before posting.";
+    formError.classList.remove("hidden");
+    doubtInput.focus();
+    return;
+  }
+
+  formError.textContent = "";
+  formError.classList.add("hidden");
 
   const submitBtn = doubtForm.querySelector('button[type="submit"]');
   if (submitBtn && submitBtn.disabled) return;
