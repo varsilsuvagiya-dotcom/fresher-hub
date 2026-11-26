@@ -19,6 +19,38 @@ fetch('../../header.html')
         document.getElementById('header-bar').innerHTML = data;
       });
 
+//footer function
+fetch('../../footer.html')
+    .then((response) => {
+
+    if (!response.ok) {
+        throw new Error("Footer not found");
+    }
+
+    return response.text();
+
+    })
+    .then((data) => {
+
+    const footerContainer =
+        document.getElementById('footer-container');
+
+    footerContainer.innerHTML = data;
+
+    // Dynamic Current Year
+    const currentYear =
+        footerContainer.querySelector("#currentYear");
+
+    if (currentYear) {
+        currentYear.textContent = new Date().getFullYear();
+        }
+
+    })
+    .catch((error) => {
+        console.error("Footer Error:", error);
+    });
+
+
 
 // Date validation
 from_date.addEventListener("change", () => {
