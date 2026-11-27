@@ -87,7 +87,7 @@
   scrollbar-color: var(--color-primary-ring) transparent;
 
   &::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
   }
   &::-webkit-scrollbar-thumb {
     background: var(--color-primary-ring);

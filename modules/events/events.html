@@ -10,7 +10,7 @@
   <body class="min-h-screen bg-slate-50">
     <!-- Shared Header -->
     <div id="header" class="sticky top-0 z-50 shrink-0"></div>
-    <main class="mx-auto w-full max-w-7xl p-5">
+    <main class="mx-auto w-full max-w-[1255px] p-5">
       <h1 class="mb-6 text-2xl font-bold sm:text-3xl">Events</h1>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
         <!-- Left:  Form -->
@@ -54,15 +54,15 @@
           <!-- Upcoming Events -->
           <div class="mb-5 border border-slate-300 bg-white shadow-sm p-4 rounded-2xl">
             <h2 class="mb-2 text-lg font-bold text-primary">Upcoming</h2>
-            <div class="h-[350px] max-h-[70vh] overflow-y-auto pr-5">
+            <div class="scroll-thin h-[350px] max-h-[70vh] overflow-y-auto pr-3">
               <p id="upcomingMessage" class="text-center mt-8 text-secondary"></p>
               <div id="upcomingEvents" class="space-y-3"></div>
             </div>
           </div>
           <!-- Past Events -->
-          <div class="space-y-3 border border-slate-300 bg-slate-50 shadow-sm p-4 rounded-2xl">
+          <div class="space-y-3 border border-slate-300 bg-slate-50 shadow-sm p-4 rounded-2xl scroll-thin">
             <h2 class="mb-2 text-lg font-bold text-primary">Past events</h2>
-            <div class="h-[350px] max-h-[70vh] overflow-y-auto pr-5">
+            <div class="scroll-thin h-[350px] max-h-[70vh] overflow-y-auto pr-3">
               <p id="pastMessage" class="text-center mt-8 text-secondary"></p>
               <div id="pastEvents" class="space-y-3"></div>
             </div>
