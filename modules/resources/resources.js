@@ -358,8 +358,11 @@ function displayResources(data) {
 
         deleteButton.type = "button";
         deleteButton.textContent = "Delete";
-        deleteButton.className =
-            "ml-4 text-red-600 text-sm font-semibold hover:text-red-800";
+        deleteButton.className = "mt-4 flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-danger-border bg-danger-bg px-4 py-2 text-sm font-semibold text-danger-text transition hover:bg-danger-bg-hover";
+        deleteButton.innerHTML = `
+                <span>🗑</span>
+                <span>Delete</span>
+            `;
 
         deleteButton.addEventListener("click", () => {
             deleteResource(resource);
@@ -460,7 +463,6 @@ async function addResource(event) {
         }
 
         resourceForm.reset();
-
         showFormMessage(
             "Resource added successfully!",
             "success"
@@ -482,6 +484,7 @@ async function addResource(event) {
             addResourceButton.disabled = false;
             addResourceButton.textContent = "+ Add Resource";
         }
+        alert("resource added successfully!")
     }
 }
 

@@ -162,6 +162,7 @@ doubtForm.addEventListener("submit", async (e) => {
     if (submitBtn) {
       submitBtn.disabled = false;
       submitBtn.textContent = originalBtnText;
+      alert("Doubt submitted successfully!")
     }
   }
 });

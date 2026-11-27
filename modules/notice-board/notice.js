@@ -55,6 +55,49 @@ fetch("../../footer.html")
     });
 
 
+// Delete daily update by its ID
+
+// Delete notice by its ID
+async function deleteNotice(id) {
+
+    if (id === undefined || id === null || id === "") {
+        alert("Unable to delete: Notice ID not found.");
+        return;
+    }
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this notice?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+
+        const response = await fetch(`${api_url}/${encodeURIComponent(id)}`, {
+            method: "DELETE"
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage || "Delete request failed");
+        }
+
+        // Refresh notice list
+        await fetch_notices();
+
+        alert("Notice deleted successfully!");
+
+    } catch (error) {
+
+        console.error("Delete Error:", error);
+
+        alert("Unable to delete notice. Please try again.");
+
+    }
+}
+
+
+
 function display_notices() {
 
     const selectedMonth = month_filter ? month_filter.value : "all";
@@ -105,11 +148,27 @@ function display_notices() {
         description.className = "text-sm text-copy leading-relaxed whitespace-pre-wrap";
         description.textContent = element.message;
 
+        const deleteBtn = document.createElement("button");
+
+            deleteBtn.type = "button";
+
+            deleteBtn.className = "mt-4 flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-danger-border bg-danger-bg px-4 py-2 text-sm font-semibold text-danger-text transition hover:bg-danger-bg-hover";
+
+            deleteBtn.innerHTML = `
+                <span>🗑</span>
+                <span>Delete Update</span>
+            `;
+
+            deleteBtn.addEventListener("click", () => {
+            deleteNotice(element.id ?? element._id);
+            });
+
         header.appendChild(heading);
         header.appendChild(date);
 
         li.appendChild(header);
         li.appendChild(description);
+        li.appendChild(deleteBtn);
 
         post_list.appendChild(li);
     });
