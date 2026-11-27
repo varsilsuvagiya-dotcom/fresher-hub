@@ -4,6 +4,7 @@ const pastEvents = document.getElementById("pastEvents");
 
 const upcomingMessage = document.getElementById("upcomingMessage");
 const pastMessage = document.getElementById("pastMessage");
+const message = document.getElementById("message");
 
 const API_URL = "https://fresher-hub-api-cloudus.onrender.com/events";
 let events;
@@ -40,14 +41,21 @@ async function loadFooter() {
 
 async function getEvents() {
   try {
+    message.textContent = "Loading Events...";
+    message.classList.remove("hidden");
     const response = await fetch(API_URL);
     if (!response.ok) {
-      throw new Error("Failed to fetch updates");
+      throw new Error("Failed to load Events");
     }
     events = await response.json();
+
+    message.textContent = "";
+    message.classList.add("hidden");
     displayEvents(events);
   } catch (error) {
     console.log(`Error: ${error.message}`);
+    message.classList.remove("hidden");
+    message.textContent = "Error loading Events.";
   }
 }
 function createEventCard(event, isPast = false) {
@@ -65,15 +73,15 @@ function createEventCard(event, isPast = false) {
     minute: "2-digit",
     hour12: true,
   });
-  const cardClass = isPast ? "flex items-center gap-4 bg-slate-100 border border-slate-300 text-slate-500 p-3 sm:p-4" : "flex items-center gap-4 bg-white border border-secondary p-3 sm:p-4";
+  const cardClass = isPast ? "flex items-center gap-4 bg-slate-100  rounded-xl border border-slate-300 text-slate-500 p-3 sm:p-4 hover:border-primary hover:shadow-sm" : "flex items-center gap-4 bg-white rounded-xl border border-line transition hover:border-primary hover:shadow-sm p-3 sm:p-4";
   return `
     <section class="${cardClass}">
     <div class="flex flex-col items-center justify-center border border-secondary h-16 w-20">
         <span class="text-xs text-primary">${day}</span>
-            <span class="text-2xl font-bold">${dateNumber}</span>
+            <span class="text-sm sm:text-2xl font-bold">${dateNumber}</span>
     </div>
     <div>
-      <h3 class="font-bold ">${event.name}</h3>
+      <h3 class="font-bold text-sm sm:text-lg ">${event.name}</h3>
       <div class="flex justify-between gap-4 items-center mt-1">
        <p class="text-sm text-slate-600">
               ${formattedTime} 
@@ -151,7 +159,7 @@ async function addEvents(newMember) {
     }
     if (response.ok) {
       const savedEvent = await response.json();
-      events.push(savedMember);
+      events.push(savedEvent);
       displayEvents(events);
       alert("Events added successfully!");
       // Clear form after successful API response

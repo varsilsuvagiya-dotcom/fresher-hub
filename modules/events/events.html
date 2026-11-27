@@ -11,12 +11,18 @@
     <!-- Shared Header -->
     <div id="header" class="sticky top-0 z-50 shrink-0"></div>
     <main class="mx-auto w-full max-w-7xl p-5">
-      <h1 class="mb-6 text-2xl font-bold sm:text-2xl">Events</h1>
+      <h1 class="mb-6 text-2xl font-bold sm:text-3xl">Events</h1>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
         <!-- Left:  Form -->
-        <section class="h-fit border border-slate-300 bg-white p-5 sm:p-6">
-          <h2 class="mb-4 text-xl font-bold">Add an event</h2>
-          <form id="eventForm" class="space-y-4">
+        <section class="h-fit border border-slate-300 bg-white rounded-2xl">
+          <!-- <h2 class="mb-4 text-xl font-bold">Add an event</h2> -->
+
+          <div class="shrink-0 border-b border-line-soft bg-primary-soft/60 px-4 py-4 sm:px-6">
+            <h2 class="text-lg sm:text-xl leading-tight font-bold text-heading">Add an event</h2>
+            <p class="mt-1.5 text-sm text-secondary">Add important events, meetings for your team.</p>
+          </div>
+
+          <form id="eventForm" class="space-y-4 p-3 sm:px-5">
             <!-- Event Name -->
             <div>
               <label for="eventName" class="mb-2 text-sm font-medium"> Event name </label>
@@ -43,17 +49,23 @@
           </form>
         </section>
         <!-- Right: Events List -->
-        <section class="md:col-span-2">
+        <section class="md:col-span-2 rounded-2xl">
+          <p id="message" class="text-center mt-8 text-secondary"></p>
           <!-- Upcoming Events -->
-          <div class="mb-3">
+          <div class="mb-5 border border-slate-300 bg-white shadow-sm p-4 rounded-2xl">
             <h2 class="mb-2 text-lg font-bold text-primary">Upcoming</h2>
-            <p id="upcomingMessage" class="text-center mt-8 text-secondary"></p>
-            <div id="upcomingEvents" class="space-y-3"></div>
+            <div class="h-[350px] max-h-[70vh] overflow-y-auto pr-5">
+              <p id="upcomingMessage" class="text-center mt-8 text-secondary"></p>
+              <div id="upcomingEvents" class="space-y-3"></div>
+            </div>
           </div>
-          <div>
+          <!-- Past Events -->
+          <div class="space-y-3 border border-slate-300 bg-slate-50 shadow-sm p-4 rounded-2xl">
             <h2 class="mb-2 text-lg font-bold text-primary">Past events</h2>
-            <p id="pastMessage" class="text-center mt-8 text-secondary"></p>
-            <div id="pastEvents" class="space-y-3"></div>
+            <div class="h-[350px] max-h-[70vh] overflow-y-auto pr-5">
+              <p id="pastMessage" class="text-center mt-8 text-secondary"></p>
+              <div id="pastEvents" class="space-y-3"></div>
+            </div>
           </div>
         </section>
       </div>
