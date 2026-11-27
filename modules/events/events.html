@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Events | Fresher Hu</title>
+    <title>Events | Fresher Hub</title>
     <link rel="stylesheet" href="../../src/output.css" />
     <link rel="stylesheet" href="../../styles.css" />
   </head>
   <body class="min-h-screen bg-slate-50">
     <!-- Shared Header -->
-    <div id="header"></div>
+    <div id="header" class="sticky top-0 z-50 shrink-0"></div>
     <main class="mx-auto w-full max-w-7xl p-5">
       <h1 class="mb-6 text-2xl font-bold sm:text-3xl">Events</h1>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -73,6 +73,45 @@
 
     <!-- Shared Footer -->
     <div id="footer-container"></div>
+
+    <!-- Mobile Navigation -->
+  <script>
+    document.addEventListener("click", function (e) {
+
+      var button = e.target.closest("#menuButton");
+
+      if (button) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var scope = button.closest("header") || document;
+        var nav = scope.querySelector("#mainNavigation");
+
+        if (!nav) return;
+
+        nav.style.removeProperty("display");
+
+        var isOpen = nav.classList.toggle("nav-open");
+
+        button.setAttribute("aria-expanded", String(isOpen));
+
+        return;
+      }
+
+      if (
+        window.innerWidth < 768 &&
+        e.target.closest("#mainNavigation a")
+      ) {
+        var openNav = document.getElementById("mainNavigation");
+
+        if (openNav) {
+          openNav.classList.remove("nav-open");
+        }
+      }
+
+    }, true);
+  </script>
+
     <script src="events.js"></script>
   </body>
 </html>

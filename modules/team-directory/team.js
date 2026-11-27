@@ -8,7 +8,7 @@ const memberModal = document.getElementById("memberModal");
 const openModal = document.getElementById("openModal");
 
 const pagination = document.getElementById("pagination");
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 8;
 let currentPage = 1;
 
 let teamMembers;
